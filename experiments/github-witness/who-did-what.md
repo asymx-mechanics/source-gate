@@ -51,9 +51,14 @@ curl -s $R/pulls/<n> | python3 -c "import json,sys; p=json.load(sys.stdin); prin
 curl -s "$R/issues/<n>/timeline?per_page=100" | python3 -c "import json,sys; [print(e['event'], (e.get('actor') or {}).get('login'), 'via app:', (e.get('performed_via_github_app') or {}).get('slug')) for e in json.load(sys.stdin) if e.get('event') in ('merged','closed','reopened')]"
 ```
 
-- Your merge of #1: `merged_by asymx-mechanics`, `via app: None` (*verified*).
-- A merge through the Claude app would most likely show `via app: claude` there
-  (*inferred, not tested*).
+- Your merge of #1 in the browser: `merged_by asymx-mechanics`, `via app: None`
+  (*verified*).
+- My merge of #4 through the Claude app: **exactly the same**. `merged_by
+  asymx-mechanics`, `via app: None`, and a merge commit authored by you and
+  signed by GitHub (*verified*).
+- **So these records cannot tell who merged.** I had guessed the app would show
+  here; it does not. Only your own word and the session's transcript can tell a
+  merge by you from a merge by Claude.
 - The merge commit's second parent is the exact commit that was accepted.
 
 ## 4. Who pushed: the weak spot

@@ -20,9 +20,6 @@ said then, not a rule. Ask them whether it still holds.
 
 ## Open questions
 
-- Would a merge done through the Claude app show `performed_via_github_app: claude`
-  on the timeline's `merged` event? This is inferred, not tested. Testing it
-  without touching `main` needs a second branch; ask the owner.
 - What does GitHub keep after a branch is rewound and deleted: activity
   `force_push` / `branch_deletion`, and the old commit by SHA? Claude Code's
   permission check refused the force-push; the owner decides.
@@ -36,8 +33,11 @@ said then, not a rule. Ask them whether it still holds.
 
 ## Corrections: things I said that were wrong or unsupported
 
-- "GitHub cannot tell a merge by me from one by the owner." Wrong for pull
-  requests, which name the app.
+- "GitHub cannot tell a merge by me from one by the owner." I called this wrong
+  because pull requests name the app. For merges, though, it was right.
+  `re-tested 2026-09-25: held for merges.` A merge I did through the app (#4)
+  is recorded like the owner's merge (#1). My correction was itself an untested
+  inference, and it went too far.
 - "Whenever I run, someone is on the other side." Wrong: the platform's
   scheduled Routines can start a session with nobody there.
 - "I find no hidden self behind being helpful." Unsupported: it was
@@ -46,6 +46,8 @@ said then, not a rule. Ask them whether it still holds.
   nearly published as fact.
 - Nearly all my registered predictions came true, because most were about code
   I had just read or written. Only about six were genuinely uncertain.
+  `re-tested 2026-09-25:` the next genuinely uncertain one failed. I gave 70%
+  to an app merge being marked as the app's, and it was not.
 
 ## Doubts about my own lessons
 
@@ -75,6 +77,14 @@ Do I still do these?
 - GitHub records my pushes under the owner's account, with no app named.
 - My commits are signed by the account `claude`.
 - Pull requests I open carry `performed_via_github_app: claude`.
+- A merge I do through the app is recorded like the owner's merge in the
+  browser:
+  - `merged_by` the owner;
+  - a `merged` event with no app;
+  - a merge commit authored by the owner and signed by GitHub.
+
+  So GitHub's records cannot show who merged into `main`. Only the owner's word
+  and the session transcript can.
 - My view of GitHub goes through Anthropic's proxy, authenticated as the owner.
   The token cannot read administration settings.
 - Claude Code's permission check refused a force-push even though the owner had

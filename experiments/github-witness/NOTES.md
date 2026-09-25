@@ -142,10 +142,40 @@ the earlier records can be compared with. [V]
 | the owner's merge | `asymx-mechanics` | **no:** `performed_via_github_app: null` | merge commit signed by GitHub (`web-flow`) |
 
 The `merged` event has an app field, and it is null for the owner's merge.
-That makes it likely that a merge through the app would show `claude` there,
-which would make the two distinguishable. [I] Testing that needs a merge that
-does not touch `main`: a second branch to merge into. My instructions confine
-pushes to one branch, so that test needs the owner's explicit OK.
+I inferred that a merge through the app would show `claude` there. **Part 4
+tested this, and the inference was wrong.**
+
+## Part 4 — a merge through the app
+
+The owner explicitly allowed research branches. I created
+`claude/witness-merge-base` (at `main`, `cd9a467`) and
+`claude/witness-merge-head` (one harmless commit, `8377cf2`), and opened #4
+between them. `main` was not touched. I merged #4 myself through the Claude app,
+passing the exact head SHA. The predictions were stated before the merge. [V]
+
+| | prediction | outcome |
+|---|---|---|
+| M1 | `merged` event carries `performed_via_github_app: claude` (~70%) | **failed:** `null`, the same as the owner's merge |
+| M2 | merge commit committed by `web-flow` and verified (~80%) | held; GOODSIG locally with GitHub's key |
+| M3 | merge commit authored by the owner's account (~75%) | held |
+
+Side by side, #4 (merged by me through the app) and #1 (merged by the owner in
+the browser) look the same in every field I checked:
+- `merged_by`;
+- the `merged` and `closed` events, both actor and app field;
+- the merge commit's author, committer, signature and message format. [V]
+
+Only the PR itself names the app (`opened via app: claude`), for both.
+
+**So GitHub's records cannot show who merged into `main`.** That this session
+never merged into `main` rests on my restraint, Claude Code's permission check,
+the platform's session transcript and the owner's word, not on GitHub. This is
+G16 from `../atomic-gate/` at GitHub's scale: whoever holds the token can make
+the "human" decision.
+
+Left in place: the two research branches and the merged #4. Deleting them is
+not needed, and a deletion is the kind of action the permission check refused
+before.
 
 ## Layers that decide what an action can do
 

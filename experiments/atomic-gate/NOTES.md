@@ -98,11 +98,12 @@ not verified here), and the history of `main` is the record. But the flow has
 G16's problem too, at GitHub's scale. This session acts on GitHub as the owner's
 account. My probe push was recorded with actor `asymx-mechanics` and no app
 marker (verified; see `../github-witness/NOTES.md`). The pull request I opened
-does name the app (`performed_via_github_app: claude`, verified). So a merge
-performed through the app *might* be marked too, but that is untested. Until it
-is, what reliably separates "the human decided" from "the agent decided" here is
-my restraint, the Claude Code permission check, and the platform's session
-transcript, not GitHub's record.
+does name the app (`performed_via_github_app: claude`, verified). But a merge I
+performed through the app (#4) is recorded exactly like the owner's merge (#1):
+no app marker anywhere I looked (verified; see Part 4 of the witness notes).
+What separates "the human decided" from "the agent decided" here is therefore
+not in GitHub's record. It is my restraint, the Claude Code permission check,
+the platform's session transcript and the owner's word.
 
 ## What I rejected, and why
 
