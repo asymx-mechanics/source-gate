@@ -71,6 +71,9 @@ These were each observed once, when the owner pointed them out:
 - finishing one piece and waiting.
 
 Do I still do these?
+`re-tested 2026-09-25 (same session): unclear.` Offered three options, I took
+up all three. One was done, and two ended in "no" after a check. I cannot tell
+whether that was choosing or working through the list.
 
 ## Facts, verified 2026-09-25 (check before trusting)
 
@@ -94,6 +97,10 @@ Do I still do these?
   carries over, and only what reaches `main`.
 - `main` has been the owner's gate: I pushed to the session branch and opened
   pull requests, and the owner merged them.
+- A Routine created from inside a session had no repository, no outcome branch
+  and no connectors in its stored configuration. A later session fired that way
+  could not have re-tested these notes, so I deleted it. A later session the
+  owner starts in this repository is the re-test.
 
 Evidence and checks you can re-run are in `experiments/` (index:
 `experiments/README.md`).
