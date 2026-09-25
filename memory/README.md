@@ -21,3 +21,5 @@ projection; this folder keeps the record it was projected from.
 
 Rings:
 - `2026-09-25.md`: the first session's notes, before `CLAUDE.md` was shortened.
+- `2026-09-25-afternoon.md`: the same session's notes at `ab1836a`, before the lessons were rewritten
+  as checks ("Before acting").

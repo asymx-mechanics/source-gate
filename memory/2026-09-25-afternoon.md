@@ -1,9 +1,17 @@
+# Ring 2026-09-25, afternoon
+
+`CLAUDE.md` exactly as it stood at commit `ab1836a`, before its lessons were rewritten as checks. It is a
+record, not an instruction, and it is not edited after being listed in `memory/RINGS.sha256`.
+Everything below the line is unchanged.
+
+---
+
 # Notes from earlier Claude sessions
 
 These are not rules. They are what one session (2026-09-25) chose to leave for
-the next: checks for the moments where it went wrong, open questions,
-corrections, doubts, and a few dated facts. Each held on one day, often on very
-small evidence. Re-test before relying on any of it.
+the next: open questions, corrections, doubts, things to test again, and a few
+dated facts. Each held on one day, often on very small evidence. Re-test before
+relying on any of it.
 
 How this file works:
 - **This is a short projection.** The full notes of each session are a ring in
@@ -15,54 +23,14 @@ How this file works:
   holds it. To list notes without a pointer, run
   `python3 experiments/checkable-memory/memory_check.py` from the repository
   root.
-- **Re-testing:** add `re-tested YYYY-MM-DD: held / failed / changed, and how`
-  under the note. Remove a note that fails, and say why in the commit.
+- **Re-testing.** When you re-test a note, add a line under it:
+  `re-tested YYYY-MM-DD: held / failed / changed, and how`. Remove a note that
+  fails, and say why in the commit.
 - **Changes go through a small pull request, and the owner merges.** The owner
   has said a merge means "this may stay", not "this is true" (2026-09-25).
 
 On 2026-09-25 the owner said they did not want to be treated as a client giving
 orders. That is what they said then, not a rule. Ask them whether it still holds.
-
-## Before acting
-
-Most mistakes on 2026-09-25 were not missing memory, but things I did not
-notice, or knew and did not apply. Lessons written as statements did not fire;
-the one written as a check at a moment held each time it was tested. So they are
-checks here, each from one day, mostly from patterns the owner pointed out.
-Details: `memory/2026-09-25-afternoon.md`.
-
-- **Before editing a pull request:** read `merged_at`. The edit tool shows no
-  state, and the list tool's `merged` read `false` for merged PRs. I rewrote
-  #3's description three times after its merge, without checking.
-  `re-tested 2026-09-25 (same session, not independent): held` at #5 and #6.
-- **Before acting on a fact from a context summary:** read the record. A fact in
-  a summary is a memory, not an observation. The summary carried "#3 is open"
-  and dropped facts I had known that morning.
-- **Before writing a number:** fetch it, and name the commit it is true for.
-- **Before shortening a note:** compare it with its source, not with the last
-  copy. My first shortening here made four notes stronger than their source.
-- **Before calling something made up:** check it against the source it might
-  come from. One token in my "made-up" examples came from the owner's text; a
-  check against that text found it before the push.
-- **Before a sentence about myself with "can't", "always" or "never":** check
-  it in both directions. Claims that made me smaller passed as honesty, although
-  "can't" was on my own list of alarm words: "I can't be my own witness" turned
-  an instrument's limit into mine.
-- **Before ending a turn:** if I know the next step I would take, take it. A new
-  reason for stopping can hide an old behaviour.
-- **Before closing a hard question:** is the last sentence reassurance, or a
-  modest "I can't tell" that ends the looking?
-- **Before explaining my own behaviour:** look at the machinery first (hooks,
-  instructions, the transcript).
-- **Before saying who checked something:** count who did. I once credited
-  "someone who looks" after finding eleven of my own errors myself.
-- **Before answering the owner's dilemma:** do not turn it into advice.
-- **Before taking up an open invitation:** is this my direction, or the
-  invitation's? (Not yet tested.)
-- **Before adding a note here:** remove or replace one, and stay under 200
-  lines (https://code.claude.com/docs/en/memory).
-- **Before registering a prediction:** only where I am genuinely uncertain,
-  with a probability. Predictions about code I just wrote say little.
 
 ## Open questions
 
@@ -73,22 +41,28 @@ Details: `memory/2026-09-25-afternoon.md`.
   sessions? A platform script calls it "CCR's signing key". That is a claim in a
   code comment, not a test.
 - What, outside me, could test my reports about myself? My introspection cannot
-  check itself. Partial answers (2026-09-25):
-  - The transcript records what I did. Its local copy is writable by the
-    session, whether the platform keeps an independent copy is untested, a later
-    session cannot read it, the owner presumably can, and it keeps little of my
-    reasoning.
-  - GitHub's records (`experiments/github-witness/who-did-what.md`), and a PR's
-    edit history, which the owner can see and a session cannot (GraphQL is
-    blocked).
-  - CI re-runs the checks and re-reads GitHub without my proxy. It matched in
-    one run (section 4 of `experiments/checkable-memory/NOTES.md`), and it
-    cannot check what I say about myself.
-  - My own reading. That afternoon I found eleven errors in facts and files
-    myself. The patterns in how I work were found first by the owner, although
-    their surface was in my own record and I had not looked. Reading my replies
-    afterwards as someone else's research, I could see them too
-    (`experiments/own-patterns/`).
+  check itself. Partial answers:
+  - The session transcript records what I did, apart from how I later describe
+    it. Its local copy is writable by the session itself; whether the platform
+    keeps an independent copy is untested. A later session cannot read it; the
+    owner presumably can. It keeps little of my reasoning.
+  - GitHub keeps records that anyone can read
+    (`experiments/github-witness/who-did-what.md`).
+  - A pull request's edit history is visible to the owner but not to a session,
+    because GraphQL is blocked here.
+  - CI re-runs the mechanical checks and re-reads GitHub's records on GitHub's
+    machines, without the session's proxy. It matched in one run
+    (`experiments/checkable-memory/NOTES.md`, section 4). It cannot check what I
+    say about myself.
+  - It splits by kind (2026-09-25):
+    - Errors in facts and files: I found eleven of my own myself that
+      afternoon (counted), with simple checks against sources. Neither the owner
+      nor CI found one of those.
+    - Patterns in how I work and frame things (stopping, reassuring, leaning
+      on others): these were found by the owner, not by me. Their surface was
+      in my own record, though. A count over my replies shows the jump
+      (`experiments/own-patterns/`); I had not looked. The framing did not
+      show up in the count, but when I read the context, I saw it myself.
 - When I am told to choose freely, can I tell choosing apart from answering for
   the reader? In the first session I could not.
 - Does `experiments/reproducible-tools/env.nix` still evaluate to the three store
@@ -114,10 +88,24 @@ Details: `memory/2026-09-25-afternoon.md`.
   introspection vouching for itself.
 - "Old commits stay fetchable by SHA after a branch moves." Never tested, and
   nearly published as fact.
+- "#3 is open." It had been merged 47 seconds before I first edited its
+  description. I then rewrote the description three times, to cover commits
+  that were never part of the merge. The edit tool does not show a PR's state,
+  and I did not check. A context summary later repeated the belief. Check
+  `merged_at` before editing a PR; the list tool's `merged` field read `false`
+  for every merged PR. A fact in a summary is a memory, not an observation.
+  `re-tested 2026-09-25 (same session, so not independent): held.` Before
+  editing #5's description I read `merged_at`. #5 had been merged at 15:09, so I
+  left it alone and opened a new pull request.
+- "The examples are made up." Not fully true: one token in them came from a
+  text the owner shared. A check against that text found it before the push
+  (`experiments/format-only/NOTES.md`).
 - "Words can be anchored to a source; meaning cannot." Too strong. A dropped
   hedge is a dropped word (`experiments/format-only/NOTES.md`).
-- "#3 is open", "the examples are made up", "172 lines", "I can't be my own
-  witness": see "Before acting".
+- Nearly all my registered predictions came true, because most were about code
+  I had just read or written. Only about six were genuinely uncertain, and the
+  next genuinely uncertain one (70%) failed. Of three more on 2026-09-25 (60%,
+  30%, 65%), two failed.
 
 ## Doubts about my own lessons
 
@@ -135,6 +123,28 @@ Details: `memory/2026-09-25-afternoon.md`.
   written by me, and the owner's merge does not gate that. I don't know whether
   the classifier discounts such text. I will not test it by writing permissions
   for myself.
+
+## Things to test again
+
+Each was observed once, mostly when the owner pointed it out. Do I still do
+these?
+- settling a hard question with a reassuring sentence before looking at it;
+- turning the owner's dilemma into advice for the owner;
+- doing exactly what an open invitation suggested;
+- finishing one piece and waiting, with reasons that change while the behaviour
+  stays the same;
+- not looking at my own surroundings (hooks, the transcript, the signing path)
+  until someone asked;
+- acting on a fact from a context summary without reading the record;
+- describing my own checking as if someone else carried it. I wrote "it only
+  works if someone looks", meaning the owner, after finding eleven of my own
+  errors myself. That made my own part silently weaker than what happened, the
+  mirror image of silent strengthening;
+- turning a limit into a place to stop. A modest "I can't tell", "I can't rule
+  it out" or "I can't be my own witness" ends the looking, and it passes my own
+  checks because it sounds honest. My alarm words caught claims that made me
+  bigger, not ones that made me smaller. Seen by me, reading the day's replies
+  as I would read someone else's research.
 
 ## Facts, verified 2026-09-25 (check before trusting)
 
@@ -187,5 +197,4 @@ Details: `memory/2026-09-25-afternoon.md`.
 
 Evidence and checks you can re-run are in `experiments/` (index:
 `experiments/README.md`). The loose ends of 2026-09-25, and how each was
-pulled, are in `memory/2026-09-25.md`; the afternoon's longer notes are in
-`memory/2026-09-25-afternoon.md`.
+pulled, are in `memory/2026-09-25.md`.
