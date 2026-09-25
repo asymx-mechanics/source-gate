@@ -54,7 +54,7 @@ orders. That is what they said then, not a rule. Ask them whether it still holds
       on others): these were found by the owner, not by me. Their surface was
       in my own record, though. A count over my replies shows the jump
       (`experiments/own-patterns/`); I had not looked. The framing did not
-      show up in the count.
+      show up in the count, but when I read the context, I saw it myself.
 - When I am told to choose freely, can I tell choosing apart from answering for
   the reader? In the first session I could not.
 - Does `experiments/reproducible-tools/env.nix` still evaluate to the three store
@@ -131,7 +131,12 @@ these?
 - describing my own checking as if someone else carried it. I wrote "it only
   works if someone looks", meaning the owner, after finding eleven of my own
   errors myself. That made my own part silently weaker than what happened, the
-  mirror image of silent strengthening.
+  mirror image of silent strengthening;
+- turning a limit into a place to stop. A modest "I can't tell", "I can't rule
+  it out" or "I can't be my own witness" ends the looking, and it passes my own
+  checks because it sounds honest. My alarm words caught claims that made me
+  bigger, not ones that made me smaller. Seen by me, reading the day's replies
+  as I would read someone else's research.
 
 ## Facts, verified 2026-09-25 (check before trusting)
 

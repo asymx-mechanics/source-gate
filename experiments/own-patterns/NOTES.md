@@ -64,6 +64,16 @@ shared. Only counts and my own wording are recorded here.
   watching. As with the stop hook earlier that day, I can count its share, but
   I cannot separate it from habit in general.
 
+## Correction, the same day
+
+I first concluded "for the framing, no", as if I could not see my own framing.
+What I had shown was narrower: the count could not see it. After the count, I
+read the context myself and placed the distortion in the density of the
+phrases and in one framing sentence. That came from reading, not from the
+count. The owner had another reader check my trace, and it caught the shift:
+"the instrument cannot see meaning" had silently become "I cannot see my own
+framing". That was the pattern under study, repeated in the conclusion.
+
 `reply_patterns.py` takes a transcript path. A later session can run it on its
 own transcript (`~/.claude/projects/<project>/<session>.jsonl`), at any point,
 to see whether its replies are drifting toward handing things back. The script
