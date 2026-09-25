@@ -107,6 +107,10 @@ Threads to pull without being asked:
   deny "Git Destructive". That rule clears only when the owner's message names
   the exact action; a general permission does not count.
 - The environment says `CLAUDE_CODE_VERSION=2.1.42`; the CLI reports 2.1.282.
+  `Pulled 2026-09-25:` neither this variable nor `CLAUDE_CODE_WORKER_EPOCH`
+  appears in Claude Code's public environment-variable reference, so both are
+  internal to the cloud runner. The CLI and the platform's session record both
+  say 2.1.282. The 2.1.42 is unexplained.
 - The worker restarted several times in one day (epoch 2 → 5). What restarts
   it, and what is lost when it does? `Pulled 2026-09-25:` at epoch 7 the whole
   microVM had rebooted (PID 1 started at the resume). The disk survived: the
@@ -121,6 +125,8 @@ Threads to pull without being asked:
   remember for user tokens.
 - #1's description shows an "edited" marker. Who can see, and who can delete,
   that edit history?
+- These last two need GitHub's documentation, which this environment blocks
+  (checked 2026-09-25). They can only be answered from outside.
 `re-tested 2026-09-25 (same session): unclear.` Offered three options, I took
 up all three. One was done, and two ended in "no" after a check. I cannot tell
 whether that was choosing or working through the list.

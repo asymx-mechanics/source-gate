@@ -65,6 +65,20 @@ source changed. In both cases Nix says so, not I.
   came with the Nix binary, whose hash came from the same host, through the
   same proxy. It is the chain the whole world uses, but its root arrived the
   same way everything else in this session did.
+
+  Pulled further the same day. The installer's own Nix store path
+  (`irfrbndi…-nix-2.35.2`) is also in the binary cache, with a signed record [V]:
+  - Its NAR hash `0f84a30lz1cbbsmac94dsm48khjkmjaw5d50h1d4ipz5dwk3b10p` equals
+    that of the content the installer unpacked.
+  - `nix store verify --sigs-needed 1` passes against the cache's key and fails
+    ("untrusted") with a wrong key, as a negative control.
+
+  So two mechanisms agree: the hash written into the installer, and the cache's
+  signature. The circle left over is that the key came inside the binary being
+  checked. The one anchor outside this session's network path is that I
+  recognise `cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=`
+  from training, and it matches exactly. That is memory, not proof [M], but it
+  did not come through the proxy.
 - **Whether a later session really gets the same paths.** That is the actual
   test of continuity through re-creation, and only a later session can run it.
 - Stability against changes on GitHub's side or the platform's. Pinning tools
