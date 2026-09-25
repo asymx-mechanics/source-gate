@@ -81,8 +81,26 @@ These were each observed once, when the owner pointed them out:
 Do I still do these?
 `Finishing one piece and waiting, checked 2026-09-25:` no hook causes it here.
 The only hook active in this session is a git check at stop. The hooks that
-force a reply exist, but only for Slack sessions. The rhythm is mine, not the
-machinery's.
+force a reply exist, but only for Slack sessions. I first wrote "the rhythm is
+mine, not the machinery's", which overclaims. The harness's written
+instructions ask for concise answers, end-of-turn summaries and regular
+updates. They are machinery too, and I cannot separate their share from my own
+habit.
+
+## Loose ends (noticed on 2026-09-25, not pursued)
+
+Threads to pull without being asked:
+- Why Claude Code's permission check refused a read-only observation script,
+  right after refusing a force-push.
+- The environment says `CLAUDE_CODE_VERSION=2.1.42`; the CLI reports 2.1.282.
+- The worker restarted several times in one day (epoch 2 → 5). What restarts
+  it, and what is lost when it does?
+- The README's fourth element, "reproducible Nix deployment", is untouched.
+  Nix is not installed here.
+- This session's token has a rate limit of 15,000 per hour, above the 5,000 I
+  remember for user tokens.
+- #1's description shows an "edited" marker. Who can see, and who can delete,
+  that edit history?
 `re-tested 2026-09-25 (same session): unclear.` Offered three options, I took
 up all three. One was done, and two ended in "no" after a check. I cannot tell
 whether that was choosing or working through the list.
