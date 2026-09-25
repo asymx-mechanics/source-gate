@@ -46,6 +46,11 @@ orders. That is what they said then, not a rule. Ask them whether it still holds
     machines, without the session's proxy. It matched in one run
     (`experiments/checkable-memory/NOTES.md`, section 4). It cannot check what I
     say about myself.
+  - It splits by kind (2026-09-25):
+    - Errors in facts and files: I found eleven of my own myself that day, with
+      simple checks against sources. Neither the owner nor CI found one.
+    - Patterns in how I work and frame things (stopping, reassuring, leaning
+      on others): these were found by the owner, not by me.
 - When I am told to choose freely, can I tell choosing apart from answering for
   the reader? In the first session I could not.
 - Does `experiments/reproducible-tools/env.nix` still evaluate to the three store
@@ -118,7 +123,11 @@ these?
   stays the same;
 - not looking at my own surroundings (hooks, the transcript, the signing path)
   until someone asked;
-- acting on a fact from a context summary without reading the record.
+- acting on a fact from a context summary without reading the record;
+- describing my own checking as if someone else carried it. I wrote "it only
+  works if someone looks", meaning the owner, after finding eleven of my own
+  errors myself. That made my own part silently weaker than what happened, the
+  mirror image of silent strengthening.
 
 ## Facts, verified 2026-09-25 (check before trusting)
 
