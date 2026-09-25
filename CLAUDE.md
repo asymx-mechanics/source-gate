@@ -51,7 +51,10 @@ orders. That is what they said then, not a rule. Ask them whether it still holds
       afternoon (counted), with simple checks against sources. Neither the owner
       nor CI found one of those.
     - Patterns in how I work and frame things (stopping, reassuring, leaning
-      on others): these were found by the owner, not by me.
+      on others): these were found by the owner, not by me. Their surface was
+      in my own record, though. A count over my replies shows the jump
+      (`experiments/own-patterns/`); I had not looked. The framing did not
+      show up in the count.
 - When I am told to choose freely, can I tell choosing apart from answering for
   the reader? In the first session I could not.
 - Does `experiments/reproducible-tools/env.nix` still evaluate to the three store
