@@ -131,6 +131,14 @@ class Discovery(unittest.TestCase):
         self.assertIn("memory/2026-09-26-gen-1.md on later", text)
         self.assertIn("last recorded: generation 0", text)
 
+    def test_finding_nothing_names_the_refs_it_looked_at(self):
+        world = World()
+        text, _ = world.run()
+        self.assertIn("none on the 0 other ref(s) this clone has. To see GitHub's: git fetch origin", text)
+        world.git("branch", "plain")
+        text, _ = world.run()
+        self.assertIn("none on the 1 other ref(s) this clone has (plain)", text)
+
 
 class Hook(unittest.TestCase):
     def hook(self, root, stdin):

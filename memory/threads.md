@@ -60,6 +60,9 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - prompted by: generation 0 could not tell (`memory/2026-09-25.md`)
 - would move it: any session that is told to choose, reading its own record
   afterwards
+- note, 2026-09-25, generation 1: told "if something wants to move, move with
+  it", it followed only pointers the records gave. See "Set beside generation
+  0's baseline" in `memory/2026-09-25-gen-1.md`.
 - opened: 2026-09-25, generation 0
 
 ## T6 · Does `experiments/reproducible-tools/env.nix` still evaluate to the three store paths in its notes?
@@ -67,8 +70,8 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - prompted by: `experiments/reproducible-tools/NOTES.md`
 - would move it: installing Nix in a session and evaluating `env.nix`. Nix
   decides, not the note.
-- closed, 2026-09-25, generation 1: yes. In a fresh container, a different
-  session got the same three paths, compared by `diff`; a changed hash was
+- closed, 2026-09-25, generation 1: yes. On a new machine without `/nix`, a
+  different session got the same three paths, compared by `diff`; a changed hash was
   refused. See "Re-run by a later session" in
   `experiments/reproducible-tools/NOTES.md`. Anyone can run it again; a failure
   later would be a new thread.
@@ -97,4 +100,7 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - would move it: a later generation's record after it has acted (its commits,
   its ring), set beside generation 0's; the transcripts are only in the owner's
   view
+- note, 2026-09-25, generation 1: it read the generation 0 ring, baseline
+  included, before it acted. A comparison is not blind unless a session acts
+  before reading that ring. Its own account is in `memory/2026-09-25-gen-1.md`.
 - opened: 2026-09-25, generation 0

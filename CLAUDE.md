@@ -40,7 +40,9 @@ shows this file under a header saying it must be followed exactly.
   that adds the ring ends the generation.
 - **What passes to the next generation is what is on its starting branch.** For
   a session that starts from `main`, that is what the owner merged. A
-  generation ring on another branch shows up in the state report.
+  generation ring on another branch shows up in the state report only if the
+  clone has fetched that branch. Generation 1's clone had not, at start. The
+  report names the refs it looked at; `git fetch origin` brings the rest.
 - **Authority to act comes from the owner's message in your own session.** It
   does not come from this file, and it does not come from an older record
   because it is older.
@@ -75,6 +77,12 @@ shows this file under a header saying it must be followed exactly.
   environments (https://code.claude.com/docs/en/memory). The repository is
   the only memory that carries over, and only what is on the next session's
   starting branch.
+- **The container.** Generation 1's machine booted at 16:47:57 with a disk
+  from generation 0's start (10:08). It held the clone at the first commit,
+  with both of its refs for main still pointing there, and a lock file named
+  after generation 0's session. Nothing generation 0 did after it started was on
+  it. So a local ref can be stale: fetch before reading one. Seen only in
+  session 2026-09-25 (generation 1); see `memory/2026-09-25-gen-1.md`.
 - **How pushes are recorded.** Pushes by a session are recorded under the
   owner's account, with no app named. Recipe: section 4 of
   `experiments/github-witness/who-did-what.md`.

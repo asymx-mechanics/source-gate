@@ -24,6 +24,7 @@ Rings:
 - `2026-09-25-afternoon.md`: `CLAUDE.md` at `ab1836a`, before the lessons became
   checks.
 - `2026-09-25-gen-0.md`: generation 0.
+- `2026-09-25-gen-1.md`: generation 1.
 
 ## Threads
 

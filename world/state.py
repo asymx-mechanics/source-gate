@@ -77,17 +77,21 @@ def generations(root):
 
 
 def rings_elsewhere(root):
-    """Generation rings on other branches that this checkout does not have."""
+    """Generation rings on other branches that this checkout does not have, and the refs looked at.
+
+    Only refs this clone has are seen. Generation 1's clone had fetched nothing but `main` at start.
+    """
     here = set(git(root, "ls-tree", "-r", "--name-only", "HEAD", "--", "memory").splitlines())
     current = git(root, "rev-parse", "--abbrev-ref", "HEAD")
-    found = []
+    found, looked = [], []
     for ref in git(root, "for-each-ref", "--format=%(refname:short)", "refs/heads", "refs/remotes").splitlines():
         if ref in (current, f"origin/{current}") or ref.endswith("/HEAD") or ref == "origin":
             continue
+        looked.append(ref)
         for path in git(root, "ls-tree", "-r", "--name-only", ref, "--", "memory").splitlines():
             if GEN_RING.match(pathlib.PurePosixPath(path).name) and path not in here:
                 found.append(f"{path} on {ref}")
-    return sorted(set(found))
+    return sorted(set(found)), looked
 
 
 def report(root, source=None):
@@ -112,9 +116,13 @@ def report(root, source=None):
         for line in gen["since"][:5]:
             short, author, subject = line.split("\t", 2)
             out.append(f"  {short} {author}: {subject[:70]}")
-    elsewhere = rings_elsewhere(root)
+    elsewhere, looked = rings_elsewhere(root)
     if elsewhere:
         out.append("- generation rings on other branches, not in this checkout: " + "; ".join(elsewhere[:5]))
+    else:
+        shown = ", ".join(looked[:4]) + (", ..." if len(looked) > 4 else "")
+        out.append(f"- generation rings on other branches: none on the {len(looked)} other ref(s) this clone has"
+                   + (f" ({shown})" if looked else "") + ". To see GitHub's: git fetch origin, then rerun.")
 
     out += ["", "Guards"]
     out += [f"- {p}" for p in problems] or ["- clean: rings unchanged, pointers resolve, facts point, CLAUDE.md within limit, threads have a status"]

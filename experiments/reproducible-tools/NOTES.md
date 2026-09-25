@@ -86,8 +86,11 @@ source changed. In both cases Nix says so, not I.
 
 ## Re-run by a later session (generation 1, 2026-09-25, about 16:50 UTC)
 
-A different session (`session_01NfosiZb5S6PvG38YooqvjT`), in a fresh container
-with no `/nix`, followed the steps above. Thread T6 asked for this.
+A different session (`session_01NfosiZb5S6PvG38YooqvjT`) followed the steps
+above. Thread T6 asked for this. Its machine booted at 16:47:57 UTC, with a
+disk restored from a snapshot taken when generation 0 started (10:08), before
+generation 0 installed Nix. There was no `/nix`. (The first version of this
+section, in `3832f90`, said "a fresh container". The next commit corrected it.)
 
 - The installer at the same URL had sha256
   `9adda97297d9e8ab360df95c729eabff4f4f93d6db091953c3a68f29e3fb130c` (the notes
