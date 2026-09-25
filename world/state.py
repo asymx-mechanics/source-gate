@@ -106,7 +106,8 @@ def report(root, source=None):
     if gen is None:
         out.append("- no generation has recorded itself yet (a generation ring is memory/<date>-gen-<N>.md)")
     else:
-        out.append(f"- last recorded: generation {gen['number']}, ended in {gen['end']} ({', '.join(gen['rings'])})")
+        ended = f"ended in {gen['end']}" if gen["end"] else "its ring is not committed yet, so it has not ended"
+        out.append(f"- last recorded: generation {gen['number']}, {ended} ({', '.join(gen['rings'])})")
         out.append(f"- commits here since then: {len(gen['since'])}, of which {len(gen['unrecorded'])} by Claude")
         for line in gen["since"][:5]:
             short, author, subject = line.split("\t", 2)
@@ -126,6 +127,8 @@ def report(root, source=None):
     unsettled = problems + ([f"{len(gen['unrecorded'])} commit(s) by Claude after the last generation ring"] if gen and gen["unrecorded"] else [])
     if gen is None:
         unsettled.append("no generation ring")
+    elif not gen["end"]:
+        unsettled.append(f"generation {gen['number']}'s ring is not committed")
     dirty = git(root, "status", "--porcelain").splitlines()
     out += ["", "World: " + ("settled" if not unsettled else "unsettled: " + "; ".join(unsettled))]
     if dirty:

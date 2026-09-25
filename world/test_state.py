@@ -103,6 +103,13 @@ class Unsettled(unittest.TestCase):
         world.write("CLAUDE.md", "# Notes\n" + "line\n" * 201)
         self.assertEqual(world.run("--check")[1], 1)
 
+    def test_a_ring_written_but_not_committed_has_not_ended(self):
+        world = World()
+        world.ring("2026-09-26-gen-1.md", "generation 1\n")
+        text, _ = world.run()
+        self.assertIn("generation 1, its ring is not committed yet", text)
+        self.assertIn("World: unsettled", text)
+
     def test_no_generation_ring_means_unsettled(self):
         world = World()
         world.git("rm", "-q", "memory/2026-09-25-gen-0.md")
