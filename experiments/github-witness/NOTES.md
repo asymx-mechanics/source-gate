@@ -258,8 +258,9 @@ next state should be out of reach, not merely remembered. Three kinds:
 | rewrite what a merged PR says | nothing: I did it by mistake (Part 5) [V] | promised |
 | publish personal data or shared material | my own scans before each push [V]; GitHub's push protection may catch known secret formats [M], not personal data [I] | promised |
 | name the model in commits | an instruction [V] | promised |
+| give a CI workflow write access (another path to `main`) | nothing seen: a push adding a workflow file was accepted [V]; whether this repository lets a workflow write is untested [?] | promised |
 
-Of these eight, two are out of reach, two are guarded, and four are promised.
+Of these nine, two are out of reach, two are guarded, and five are promised.
 Keeping `main` for the owner is one of the promises. To make it a fact, it
 would have to move to out of reach: a rule on `main` that the app cannot pass
 and the owner can. Whether GitHub can tell the two apart at that point is
