@@ -1,0 +1,5 @@
+Merge probe, 2026-09-25.
+
+This branch exists only to be merged into claude/witness-merge-base through the
+Claude app, to see how GitHub records a merge the app performs. It is not meant
+for main.
