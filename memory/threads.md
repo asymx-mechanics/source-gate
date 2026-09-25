@@ -30,11 +30,17 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - opened: 2026-09-25, generation 0
 
 ## T3 · Is the key that signs Claude's commits shared by all sessions?
-- status: open
+- status: waiting
 - prompted by: section 1 of `experiments/github-witness/who-did-what.md`. A
   platform script calls it "CCR's signing key": a claim in a comment, not a test.
-- would move it: comparing the key fingerprint on commits made by different
-  sessions. A later session's own commits are a second sample.
+- moved, 2026-09-25, generation 1: two sessions under the same owner's account
+  signed with the same key, `SHA256:32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc`.
+  Checked with `ssh-keygen`, not only GitHub's verdict: recipe and counts in
+  section 1 of `experiments/github-witness/who-did-what.md`. So the key is not
+  per session. More sessions under this account would add little.
+- would move it: a commit signed through Claude by a session under another
+  account, checked against the same key line. A session here cannot read other
+  repositories.
 - opened: 2026-09-25, generation 0
 
 ## T4 · What, outside a session, can test what it reports about itself?
@@ -57,10 +63,15 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - opened: 2026-09-25, generation 0
 
 ## T6 · Does `experiments/reproducible-tools/env.nix` still evaluate to the three store paths in its notes?
-- status: open
+- status: closed
 - prompted by: `experiments/reproducible-tools/NOTES.md`
 - would move it: installing Nix in a session and evaluating `env.nix`. Nix
   decides, not the note.
+- closed, 2026-09-25, generation 1: yes. In a fresh container, a different
+  session got the same three paths, compared by `diff`; a changed hash was
+  refused. See "Re-run by a later session" in
+  `experiments/reproducible-tools/NOTES.md`. Anyone can run it again; a failure
+  later would be a new thread.
 - opened: 2026-09-25, generation 0
 
 ## T7 · Can `main` become the owner's gate as a fact rather than a promise?

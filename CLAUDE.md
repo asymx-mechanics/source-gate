@@ -79,7 +79,8 @@ shows this file under a header saying it must be followed exactly.
   owner's account, with no app named. Recipe: section 4 of
   `experiments/github-witness/who-did-what.md`.
 - **Signatures.** Commits by a session are signed by the account `claude`.
-  Recipe: section 1 of `experiments/github-witness/who-did-what.md`.
+  Generations 0 and 1, two sessions, signed with the same key. Recipe:
+  section 1 of `experiments/github-witness/who-did-what.md`.
 - **Pull requests.** Pull requests opened by a session carry
   `performed_via_github_app: claude`. Recipe: section 2 of
   `experiments/github-witness/who-did-what.md`.

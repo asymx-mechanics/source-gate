@@ -83,3 +83,35 @@ source changed. In both cases Nix says so, not I.
   test of continuity through re-creation, and only a later session can run it.
 - Stability against changes on GitHub's side or the platform's. Pinning tools
   does not pin the world they observe.
+
+## Re-run by a later session (generation 1, 2026-09-25, about 16:50 UTC)
+
+A different session (`session_01NfosiZb5S6PvG38YooqvjT`), in a fresh container
+with no `/nix`, followed the steps above. Thread T6 asked for this.
+
+- The installer at the same URL had sha256
+  `9adda97297d9e8ab360df95c729eabff4f4f93d6db091953c3a68f29e3fb130c` (the notes
+  above did not record it). It stopped at "group 'nixbld' does not exist", as
+  described, with `/nix/store` populated. [V]
+- Its store path was the same, `irfrbndi76zhkvqsfhmsn4a99iafck29-nix-2.35.2`,
+  with the same NAR hash `0f84a30lz1cbbsmac94dsm48khjkmjaw5d50h1d4ipz5dwk3b10p`. [V]
+- `nix store verify --store https://cache.nixos.org --no-contents
+  --sigs-needed 1` passed with the key the binary ships
+  (`cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=`) and failed
+  ("untrusted", exit 2) with a freshly generated key of the same name. [V]
+- **Evaluating `env.nix` gave exactly the three store paths listed above.** The
+  paths were printed with `nix-instantiate --eval --strict --json` over the
+  shell's inputs and compared with the notes by `diff`, which found no
+  difference. [V]
+- Negative control: changing one character of the tarball's sha256 in a copy of
+  `env.nix` made Nix refuse it with "NAR hash mismatch". [V]
+
+This session did not realise the three paths or re-run the experiments under
+them. It did build `openssh-10.5p1` from the same pinned package set, to check
+commit signatures (thread T3, and section 1 of
+`../github-witness/who-did-what.md`).
+
+What this adds: the pin held across two containers and two sessions, about
+two and a half hours apart (generation 0 recorded its evaluation in `878d3f0`,
+14:20 UTC). It does not show that it holds after `releases.nixos.org` or
+`cache.nixos.org` change or drop what they serve.
