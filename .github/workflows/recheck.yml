@@ -62,6 +62,7 @@ jobs:
                   a = json.load(response)
                   print("no token, /activity: HTTP", response.status, "|", len(a), "entries | actors:", sorted({x["actor"]["login"] for x in a}),
                         "| types:", sorted({x["activity_type"] for x in a}))
+                  print("rate limit on this request:", response.headers.get("X-RateLimit-Limit"), "(60 means GitHub saw no credentials)")
           except urllib.error.HTTPError as error:
               print("no token, /activity: HTTP", error.code, "|", error.read()[:300].decode(errors="replace"))
           EOF
