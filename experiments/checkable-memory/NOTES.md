@@ -84,6 +84,9 @@ survived: treating absolute paths as pointers. My test used `/tmp`, which
 exists on every machine, so the mutated check found the "pointer" and passed.
 The test now uses a path that does not exist. [V]
 
+Later the same day, "seen only" became case-insensitive, with one more test, after the check
+missed "Seen only" at the start of a sentence in the rewritten `CLAUDE.md`.
+
 **Before the rewrite.** Every fact failed:
 
 | `CLAUDE.md` | facts | with a pointer | problems |

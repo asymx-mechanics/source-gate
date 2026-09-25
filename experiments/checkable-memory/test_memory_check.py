@@ -49,6 +49,9 @@ class FactsMustSayHowTheyAreKnown(unittest.TestCase):
     def test_a_fact_seen_only_in_one_session_passes(self):
         self.assertEqual(Repo(FACTS + "- A force-push was refused (seen only in session 2026-09-25).\n").problems(), [])
 
+    def test_seen_only_at_the_start_of_a_sentence_counts(self):
+        self.assertEqual(Repo(FACTS + "- A Routine stored no repository. Seen only in session 2026-09-25.\n").problems(), [])
+
     def test_a_fact_pointing_to_a_url_passes(self):
         self.assertEqual(Repo(FACTS + "- Auto memory is machine-local (https://code.claude.com/docs/en/memory).\n").problems(), [])
 

@@ -56,7 +56,7 @@ def check(claude_md, root="."):
         if not notes:
             continue
         pointed = [n for n in notes if URL.search(" ".join(n)) or any(is_path(t) and (root / t).exists() for t in TICKED.findall(" ".join(n)))]
-        seen_only = [n for n in notes if "seen only" in " ".join(n)]
+        seen_only = [n for n in notes if "seen only" in " ".join(n).lower()]
         counts[name] = (len(notes), len(pointed), len(seen_only))
         if name.startswith("Facts"):
             for n in notes:

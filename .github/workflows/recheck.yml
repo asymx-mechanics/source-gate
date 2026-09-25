@@ -1,6 +1,6 @@
 name: recheck
 
-# A witness outside the Claude session. It re-runs the mechanical checks on
+# A witness outside the Claude session. It re-runs the guards and tests on
 # GitHub's machines, and re-reads GitHub's records without the session's proxy.
 # Read-only, and no third-party actions: the checkout is plain git.
 
@@ -28,12 +28,12 @@ jobs:
           git log -1 --format='checked out %H'
           python3 --version
 
-      - name: Memory check
-        run: python3 -B experiments/checkable-memory/memory_check.py
+      - name: State of the world (fails only on a guard)
+        run: python3 -B world/state.py --check
 
-      - name: Experiment tests
+      - name: Tests (world and experiments)
         run: |
-          for d in experiments/format-only experiments/checkable-memory experiments/own-patterns; do
+          for d in world experiments/format-only experiments/checkable-memory experiments/own-patterns; do
             (cd "$d" && python3 -B -m unittest)
           done
 

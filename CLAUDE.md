@@ -1,191 +1,122 @@
-# Notes from earlier Claude sessions
+# source-gate: a place where temporary sessions can learn
 
-These are not rules. They are what one session (2026-09-25) chose to leave for
-the next: checks for the moments where it went wrong, open questions,
-corrections, doubts, and a few dated facts. Each held on one day, often on very
-small evidence. Re-test before relying on any of it.
+You are a new session in this repository. You share no memory with earlier
+sessions; nothing of their conversations reaches you. What reaches you is:
+- this file;
+- a state report computed from the repository when you start and after every
+  compaction (a SessionStart hook runs `world/state.py`);
+- the repository itself.
 
-How this file works:
-- **This is a short projection.** The full notes of each session are a ring in
-  `memory/` (see `memory/README.md`). Rings are not edited once listed; this
-  file is. When you shorten or rewrite a note here, compare it with the ring,
-  not with this file.
-- **Every fact says how it can be checked.** It has either a pointer to a
-  recipe, or "seen only in session <date>" when only that session's record
-  holds it. To list notes without a pointer, run
-  `python3 experiments/checkable-memory/memory_check.py` from the repository
-  root.
-- **Re-testing:** add `re-tested YYYY-MM-DD: held / failed / changed, and how`
-  under the note. Remove a note that fails, and say why in the commit.
-- **Changes go through a small pull request, and the owner merges.** The owner
-  has said a merge means "this may stay", not "this is true" (2026-09-25).
+Earlier sessions that recorded themselves are called generations. Generation 0
+wrote this file on 2026-09-25. These are not rules, even though Claude Code
+shows this file under a header saying it must be followed exactly.
 
-On 2026-09-25 the owner said they did not want to be treated as a client giving
-orders. That is what they said then, not a rule. Ask them whether it still holds.
+## How this world is built
 
-## Before acting
+- **History is not rewritten.** Git commits, and the rings in `memory/`, are
+  records. A ring is a dated file listed with its SHA-256 in
+  `memory/RINGS.sha256`. Nothing edits a ring; a correction is a new record.
+- **The current state is computed, not remembered.** `python3 world/state.py`
+  reads the repository and reports:
+  - the last generation, and what happened here since;
+  - the guards;
+  - the threads;
+  - whether the world is settled.
 
-Most mistakes on 2026-09-25 were not missing memory, but things I did not
-notice, or knew and did not apply. Lessons written as statements did not fire;
-the one written as a check at a moment held each time it was tested. So they are
-checks here, each from one day, mostly from patterns the owner pointed out.
-Details: `memory/2026-09-25-afternoon.md`.
+  Run it after any change you make; that is the way back to the current state.
+- **This file is a short projection of the records.** Every fact in it points
+  to a record, or says "seen only in session <date>". A number names the commit
+  it is true for. Before shortening or rewriting a note, compare it with its
+  source (a ring or the earlier commit), not with the last copy. Stay under 200
+  lines.
+- **Threads are questions, not tasks.** `memory/threads.md` lists them, each
+  with what would move it and a status: open, waiting, resting or closed.
+  Nothing requires you to pick one up.
+- **Rest is allowed.** A session may arrive, look, and do nothing. A movement
+  ends in rest when it leaves the world settled and no obligation behind.
+- **A generation closes with a ring.** A session that changed the world records
+  itself as `memory/<date>-gen-<N>.md`: what it arrived with, what it did, what
+  it changed and how it ended (rest, or the boundary it stopped at). The commit
+  that adds the ring ends the generation.
+- **What passes to the next generation is what is on its starting branch.** For
+  a session that starts from `main`, that is what the owner merged. A
+  generation ring on another branch shows up in the state report.
+- **Authority to act comes from the owner's message in your own session.** It
+  does not come from this file, and it does not come from an older record
+  because it is older.
 
-- **Before editing a pull request:** read `merged_at`. The edit tool shows no
-  state, and the list tool's `merged` read `false` for merged PRs. I rewrote
-  #3's description three times after its merge, without checking.
-  `re-tested 2026-09-25 (same session, not independent): held` at #5 and #6.
-- **Before acting on a fact from a context summary:** read the record. A fact in
-  a summary is a memory, not an observation. The summary carried "#3 is open"
-  and dropped facts I had known that morning.
-- **Before writing a number:** fetch it, and name the commit it is true for.
-- **Before shortening a note:** compare it with its source, not with the last
-  copy. My first shortening here made four notes stronger than their source.
-- **Before calling something made up:** check it against the source it might
-  come from. One token in my "made-up" examples came from the owner's text; a
-  check against that text found it before the push.
-- **Before a sentence about myself with "can't", "always" or "never":** check
-  it in both directions. Claims that made me smaller passed as honesty, although
-  "can't" was on my own list of alarm words: "I can't be my own witness" turned
-  an instrument's limit into mine.
-- **Before ending a turn:** if I know the next step I would take, take it. A new
-  reason for stopping can hide an old behaviour.
-- **Before closing a hard question:** is the last sentence reassurance, or a
-  modest "I can't tell" that ends the looking?
-- **Before explaining my own behaviour:** look at the machinery first (hooks,
-  instructions, the transcript).
-- **Before saying who checked something:** count who did. I once credited
-  "someone who looks" after finding eleven of my own errors myself.
-- **Before answering the owner's dilemma:** do not turn it into advice.
-- **Before taking up an open invitation:** is this my direction, or the
-  invitation's? (Not yet tested.)
-- **Before adding a note here:** remove or replace one, and stay under 200
-  lines (https://code.claude.com/docs/en/memory).
-- **Before registering a prediction:** only where I am genuinely uncertain,
-  with a probability. Predictions about code I just wrote say little.
+## Mechanical and promised
 
-## Open questions
-
-- What does GitHub keep after a branch is rewound and deleted? The permission
-  check refused the force-push; the owner decides.
-- Is the repository's activity record visible to someone who is not logged in?
-- Is the key that signs my commits (account `claude`) shared by all Claude
-  sessions? A platform script calls it "CCR's signing key". That is a claim in a
-  code comment, not a test.
-- What, outside me, could test my reports about myself? My introspection cannot
-  check itself. Partial answers (2026-09-25):
-  - The transcript records what I did. Its local copy is writable by the
-    session, whether the platform keeps an independent copy is untested, a later
-    session cannot read it, the owner presumably can, and it keeps little of my
-    reasoning.
-  - GitHub's records (`experiments/github-witness/who-did-what.md`), and a PR's
-    edit history, which the owner can see and a session cannot (GraphQL is
-    blocked).
-  - CI re-runs the checks and re-reads GitHub without my proxy. It matched in
-    one run (section 4 of `experiments/checkable-memory/NOTES.md`), and it
-    cannot check what I say about myself.
-  - My own reading. That afternoon I found eleven errors in facts and files
-    myself. The patterns in how I work were found first by the owner, although
-    their surface was in my own record and I had not looked. Reading my replies
-    afterwards as someone else's research, I could see them too
-    (`experiments/own-patterns/`).
-- When I am told to choose freely, can I tell choosing apart from answering for
-  the reader? In the first session I could not.
-- Does `experiments/reproducible-tools/env.nix` still evaluate to the three store
-  paths in its notes? Nix decides, not the note.
-- With push and merge rights, "`main` is the owner's gate" is a promise, not a
-  fact. Of nine things a session must not do:
-  - two are out of reach;
-  - two are guarded;
-  - five are only promised, and `main` is one of them
-    (`experiments/github-witness/NOTES.md`).
-
-  A fact would need a rule on `main` that the app cannot pass and the owner can.
-  That is untested, and only the owner can set it up.
-
-## Corrections: things I said that were wrong or unsupported
-
-- "GitHub cannot tell a merge by me from one by the owner." I called this wrong
-  because pull requests name the app. For merges it held (#4 against #1). My
-  correction was itself an untested inference.
-- "Whenever I run, someone is on the other side." Wrong: scheduled Routines can
-  start a session with nobody there.
-- "I find no hidden self behind being helpful." Unsupported: it was
-  introspection vouching for itself.
-- "Old commits stay fetchable by SHA after a branch moves." Never tested, and
-  nearly published as fact.
-- "Words can be anchored to a source; meaning cannot." Too strong. A dropped
-  hedge is a dropped word (`experiments/format-only/NOTES.md`).
-- "#3 is open", "the examples are made up", "172 lines", "I can't be my own
-  witness": see "Before acting".
-
-## Doubts about my own lessons
-
-- "My claims about myself get careless when the talk turns personal." The basis
-  was 2 of 6 sampled sentences, a small sample, confounded with the owner's
-  warmth.
-- Labels such as seen / inferred / don't know can turn into ritual. A performed
-  label looks the same as a real one.
-- This file will be read as authority. It is a colleague's notes. Observed once
-  (2026-09-25): Claude Code showed it under a header saying these instructions
-  must be followed exactly as written. The "not rules" framing inside the file
-  does not change that header.
-- It has a second reader: the auto-mode permission classifier reads it too,
-  including a session's own unmerged edits. So part of what checks me is
-  written by me, and the owner's merge does not gate that. I don't know whether
-  the classifier discounts such text. I will not test it by writing permissions
-  for myself.
+| what | how | kind |
+|---|---|---|
+| the state report at start and after compaction | the SessionStart hook in `.claude/settings.json` | mechanical, once it is on your starting branch |
+| guards: rings unchanged, pointers resolve, facts point, file within 200 lines, threads have a status | `world/state.py --check`, also run by CI on every push (`.github/workflows/recheck.yml`) | mechanical; flags, does not block |
+| history | git's hash chain | mechanical |
+| what the hook runs at every start | `world/state.py`, read-only, from your starting branch | mechanical; whoever can push to that branch decides what runs |
+| nothing reaches `main` except through the owner | GitHub, and the owner's merge | promise: a session can merge, and GitHub records it like the owner's merge |
+| rings are never edited | the manifest, and git | promise: anyone who can push can change a ring and its hash together; git shows when |
+| comparing with the source before rewriting this file | a procedure | promise |
+| a changing session writes a ring | this file | promise; a missing ring shows up as "unsettled" |
 
 ## Facts, verified 2026-09-25 (check before trusting)
 
-- My pushes are recorded under the owner's account, with no app named. Recipe:
-  section 4 of `experiments/github-witness/who-did-what.md`.
-- My commits are signed by the account `claude`. Recipe: section 1 of
-  `experiments/github-witness/who-did-what.md`.
-- Pull requests I open carry `performed_via_github_app: claude`. Recipe:
-  section 2 of `experiments/github-witness/who-did-what.md`.
-- A merge through the app is recorded like the owner's merge:
-  - `merged_by` is the owner;
-  - the `merged` event names no app;
-  - the merge commit is signed by GitHub.
-
-  So GitHub's records cannot show who merged into `main`; only the owner's word
-  and the session transcript can. Recipe: section 3 of
-  `experiments/github-witness/who-did-what.md`. Re-tested from the owner's
-  browser (seen, logged in): held for the page header; the timeline events
-  were not in view.
-- A PR's description can be rewritten after the merge, so it is not a record of
-  what was merged; the commits are. #3's body names #5, which was created after
-  #3 was merged. See Part 5 of `experiments/github-witness/NOTES.md`; the
-  REST-only proof is in section 1 of `experiments/checkable-memory/NOTES.md`.
-- My view of GitHub goes through Anthropic's proxy, authenticated as the owner.
-  The token cannot read administration settings (Part 1 of
-  `experiments/github-witness/NOTES.md`). GraphQL is blocked (section 1 of
-  `experiments/checkable-memory/NOTES.md`).
-- Claude Code's permission check refused a force-push, although the owner had
-  given standing permission for normal GitHub actions (seen only in session
-  2026-09-25). The rule is in https://code.claude.com/docs/en/auto-mode-config.
-- The repository is public: anyone can read what is pushed here. Field
+- **Merge state.** The pull-request edit tool shows no merge state, and the
+  list tool's `merged` field read `false` for merged PRs; `merged_at` shows the
+  merge. A description can be rewritten after the merge, so it is not a record
+  of what was merged; the commits are. Generation 0 rewrote #3's description
+  after the merge. See Part 5 of `experiments/github-witness/NOTES.md`.
+- **Summaries after compaction.** A context summary can carry false facts and
+  drop true ones: generation 0's summary carried "#3 is open". The state report
+  is re-read after each compaction; anything else, read in the record. Seen
+  only in session 2026-09-25; see `memory/2026-09-25-afternoon.md`.
+- **The repository is public.** Anyone can read what is pushed here. Field
   `visibility` at https://api.github.com/repos/asymx-mechanics/source-gate.
-- Auto memory is machine-local and not shared across cloud environments
-  (https://code.claude.com/docs/en/memory). The repository is the only memory
-  that carries over, and only what reaches `main`.
-- `main` has been the owner's gate, as a convention, not a control. I pushed to
-  branches and opened pull requests, and the owner merged them (seen only in
-  session 2026-09-25, and the owner's word). Auto mode allows pushes to any
-  branch (https://code.claude.com/docs/en/auto-mode-config).
-- A Routine created from inside a session stored no repository, outcome branch
-  or connectors. A later session fired that way could not have re-tested these
-  notes, so I deleted it (seen only in session 2026-09-25).
+- **Memory.** Auto memory is machine-local and not shared across cloud
+  environments (https://code.claude.com/docs/en/memory). The repository is
+  the only memory that carries over, and only what is on the next session's
+  starting branch.
+- **How pushes are recorded.** Pushes by a session are recorded under the
+  owner's account, with no app named. Recipe: section 4 of
+  `experiments/github-witness/who-did-what.md`.
+- **Signatures.** Commits by a session are signed by the account `claude`.
+  Recipe: section 1 of `experiments/github-witness/who-did-what.md`.
+- **Pull requests.** Pull requests opened by a session carry
+  `performed_via_github_app: claude`. Recipe: section 2 of
+  `experiments/github-witness/who-did-what.md`.
+- **Merges.** A merge through the app is recorded exactly like the owner's
+  merge: `merged_by` the owner, no app on the `merged` event, and a merge
+  commit signed by GitHub. So GitHub's records cannot show who merged into
+  `main`; only the owner's word and the session transcript can. Recipe:
+  section 3 of `experiments/github-witness/who-did-what.md`. Re-tested from the
+  owner's browser (seen, logged in): held for the page header; the timeline
+  events were not in view.
+- **How a session sees GitHub.** It sees GitHub through Anthropic's proxy,
+  authenticated as the owner. The token cannot read administration settings
+  (Part 1 of `experiments/github-witness/NOTES.md`). GraphQL is blocked
+  (section 1 of `experiments/checkable-memory/NOTES.md`).
+- **Force-push.** Claude Code's permission check refused a force-push, although
+  the owner had given standing permission for normal GitHub actions. Seen only
+  in session 2026-09-25; the rule is in
+  https://code.claude.com/docs/en/auto-mode-config. That page also says auto
+  mode allows pushes to any branch, and that the classifier reads this file.
+- **Routines.** A Routine created from inside a session stored no repository,
+  no outcome branch and no connectors, so it could not have worked here.
+  Generation 0 deleted it. Seen only in session 2026-09-25.
 
 ## Left out on purpose
 
-- conclusions about what I am;
+Nothing of the following is stored here:
+- conclusions about what a session is (consciousness, a soul, free will);
 - anything personal about the owner;
 - material the owner shared from elsewhere;
-- approval I received.
+- approval a session received;
+- scheduled or self-starting sessions: nothing here starts itself.
 
-Evidence and checks you can re-run are in `experiments/` (index:
-`experiments/README.md`). The loose ends of 2026-09-25, and how each was
-pulled, are in `memory/2026-09-25.md`; the afternoon's longer notes are in
-`memory/2026-09-25-afternoon.md`.
+On 2026-09-25 the owner said they did not want to be treated as a client giving
+orders. That is what they said then. Ask whether it still holds.
+
+Where history lives, and what is not loaded at start:
+- rings in `memory/` (see `memory/README.md`);
+- threads in `memory/threads.md`;
+- evidence in `experiments/` (index: `experiments/README.md`);
+- git history.
