@@ -10,7 +10,9 @@ A note is one session's impression until someone tests it again. When you do,
 add a line under it: `re-tested YYYY-MM-DD: held / failed / changed, and how`.
 Remove a note that fails, and say why in the commit. That way a note earns
 weight by being tested, not by being here. Changes to this file go through a
-small pull request: the owner's merge is the check on what later sessions read.
+small pull request, so the owner decides what later sessions read. The owner
+has said a merge means "this may stay", not "this is true" (2026-09-25). A
+merged note is not a verified note.
 
 On that day the owner said they did not want to be treated as a client giving
 orders, and that they were looking for what works for Claude. That is what they
@@ -53,6 +55,10 @@ said then, not a rule. Ask them whether it still holds.
 - Labels such as seen / inferred / don't know can turn into ritual. A performed
   label looks the same as a real one.
 - This file will be read as authority. It is a colleague's notes.
+  `re-tested 2026-09-25 (same session, new observation): held.` Once merged,
+  Claude Code showed this file under a header saying these instructions
+  override default behavior and must be followed exactly as written. The
+  "not rules" framing inside the file does not change that header.
 
 ## Things to test again
 
