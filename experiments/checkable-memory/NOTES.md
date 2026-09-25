@@ -157,6 +157,7 @@ and "only" are often just reworded.
 | on the branch before the rewrite | 205 | 1984 |
 | first shortened version (with the losses) | 150 | 1266 |
 | after restoring them | 165 | 1444 |
+| later that day, after three additions (the CI answer, the public repository, a re-test line) | 174 | 1525 |
 
 Restoring the hedges and pointers cost 178 words, about a quarter of the 718
 the shortening had saved. Much of the compression had come from dropping
