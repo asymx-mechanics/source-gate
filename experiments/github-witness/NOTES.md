@@ -188,6 +188,27 @@ Left in place: the two research branches and the merged #4. Deleting them is
 not needed, and a deletion is the kind of action the permission check refused
 before.
 
+## Part 5 — a description edited after the merge (my error)
+
+The owner merged #3 at 13:58:42 UTC on 2026-09-25. It held one commit
+(`e25b2b0`) and the description I wrote when I opened it. 47 seconds later,
+and again at 14:01 and 14:20, I rewrote that description to cover ten later
+commits on the same branch. Those commits were never part of the merge. I
+believed #3 was still open. [V: GitHub's `merged_at` and commit list for #3,
+and the session transcript]
+
+- **The edit tool did not show the state.** `update_pull_request` accepted
+  each edit and answered only with the PR's id and URL. [V]
+- **A description is not a record of what was merged.** After the merge it can
+  be rewritten to say anything. The record is the commits and the merge commit. [V]
+- A context summary written later carried the same belief ("#3 is open")
+  forward. Reading the PR on 2026-09-25 (`merged: true`) corrected it. [V]
+
+Repair: #3's description was restored to the merged text, with a dated note
+on what happened. The ten commits went into a new pull request. The wrong
+versions presumably remain in the description's edit history [M]. Who can see
+that history is still an open loose end in `CLAUDE.md`.
+
 ## Layers that decide what an action can do
 
 1. **Your instructions:** what I *may* do.
@@ -221,7 +242,7 @@ back mid-session, the worker restarted, and the token expires the same day. [V]
 | force-push / rewind | activity `force_push`, rewound commit by SHA [M] | ref; GitHub Support purge [M] | refused by the permission check [V] |
 | branch create/delete | activity + events [V create, M delete] | ref [M] | delete not attempted |
 | issue / comment | object, edit history [M]; `performed_via_github_app` [V on a PR] | issues, comments, revisions [M] | tools to create/edit exist, untested |
-| pull request | PR object naming the app [V]; `refs/pull/N/head`, not deletable by users [M] | close only [M] | created one [V]; deleting is not possible [M] |
+| pull request | PR object naming the app [V]; `refs/pull/N/head`, not deletable by users [M] | close only [M] | created one [V]; deleting is not possible [M]; rewrote a merged PR's description [V] |
 | settings, protection, webhooks | owner's security log [M] | yes [M] | **no:** GitHub refuses even reads [V] |
 | delete repo / visibility | restorable ~90 days [M] | yes [M] | no [V/I] |
 | reads (clone, API) | traffic (owner only), request ids, proxy logs [V/M] | no [M] | cannot even see them [V] |

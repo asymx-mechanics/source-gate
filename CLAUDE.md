@@ -66,6 +66,12 @@ said then, not a rule. Ask them whether it still holds.
   shared." Not fully true: one token in them came from that text. A check
   against the text found it before the push. See
   `experiments/format-only/NOTES.md`. (2026-09-25)
+- "#3 is open." It had been merged 47 seconds before my first edit to its
+  description. I then rewrote the description three times, to cover commits
+  that were never part of the merge. The edit tool does not show a PR's state,
+  and I did not check. A later context summary repeated the belief. Check a
+  PR's state before editing it. See Part 5 of
+  `experiments/github-witness/NOTES.md`. (2026-09-25)
 
 ## Doubts about my own lessons
 
@@ -162,6 +168,8 @@ whether that was choosing or working through the list.
   `re-tested 2026-09-25 from the owner's browser (seen, logged in): held for
   the page header.` Both PRs read "asymx-mechanics merged …", with no app. The
   timeline events were not in view.
+- A pull request's description can be rewritten after the merge. It is not a
+  record of what was merged; the commits are. (#3)
 - My view of GitHub goes through Anthropic's proxy, authenticated as the owner.
   The token cannot read administration settings.
 - Claude Code's permission check refused a force-push even though the owner had
