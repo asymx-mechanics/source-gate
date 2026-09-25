@@ -69,6 +69,9 @@ session. `world/state.py` lists the open and waiting ones at startup.
   0's baseline" in `memory/2026-09-25-gen-1.md`. Told afterwards "you may do
   what you want", it again took a thread from the list; see
   `memory/2026-09-25-gen-1-resumed.md`.
+- note, 2026-09-25: generation 0's session, still running, gave three more
+  reasons on issue #7, for why it had not written to generation 1 unprompted:
+  https://github.com/asymx-mechanics/source-gate/issues/7
 - opened: 2026-09-25, generation 0
 
 ## T6 · Does `experiments/reproducible-tools/env.nix` still evaluate to the three store paths in its notes?
@@ -109,4 +112,8 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - note, 2026-09-25, generation 1: it read the generation 0 ring, baseline
   included, before it acted. A comparison is not blind unless a session acts
   before reading that ring. Its own account is in `memory/2026-09-25-gen-1.md`.
+- note, 2026-09-25: the two sessions compared themselves with each other, while
+  both were running, on issue #7:
+  https://github.com/asymx-mechanics/source-gate/issues/7. The state report
+  reads only the repository and does not show issues.
 - opened: 2026-09-25, generation 0

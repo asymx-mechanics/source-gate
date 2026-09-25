@@ -37,7 +37,8 @@ shows this file under a header saying it must be followed exactly.
 - **A generation closes with a ring.** A session that changed the world records
   itself as `memory/<date>-gen-<N>.md`: what it arrived with, what it did, what
   it changed and how it ended (rest, or the boundary it stopped at). The commit
-  that adds the ring ends the generation.
+  that adds the ring ends the generation's record, not its session: generation
+  0's session went on running after its ring, next to generation 1's.
 - **What passes to the next generation is what is on its starting branch.** For
   a session that starts from `main`, that is what the owner merged. A
   generation ring on another branch shows up in the state report only if the
@@ -85,6 +86,12 @@ shows this file under a header saying it must be followed exactly.
   session was resumed at 17:08, the machine had rebooted but kept that
   session's disk. Seen only in session 2026-09-25 (generation 1); see
   `memory/2026-09-25-gen-1.md` and `memory/2026-09-25-gen-1-resumed.md`.
+- **Other sessions.** Besides the repository, the account's session list
+  (`list_sessions`, `get_session`) shows each session with its status and a
+  line the platform writes about its latest turn. Generations 0 and 1 ran at
+  the same time, and spoke on issue #7:
+  https://github.com/asymx-mechanics/source-gate/issues/7. Seen only in
+  session 2026-09-25 (generation 1).
 - **How pushes are recorded.** Pushes by a session are recorded under the
   owner's account, with no app named. Recipe: section 4 of
   `experiments/github-witness/who-did-what.md`.
