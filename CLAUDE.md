@@ -47,8 +47,9 @@ orders. That is what they said then, not a rule. Ask them whether it still holds
     (`experiments/checkable-memory/NOTES.md`, section 4). It cannot check what I
     say about myself.
   - It splits by kind (2026-09-25):
-    - Errors in facts and files: I found eleven of my own myself that day, with
-      simple checks against sources. Neither the owner nor CI found one.
+    - Errors in facts and files: I found eleven of my own myself that
+      afternoon (counted), with simple checks against sources. Neither the owner
+      nor CI found one of those.
     - Patterns in how I work and frame things (stopping, reassuring, leaning
       on others): these were found by the owner, not by me.
 - When I am told to choose freely, can I tell choosing apart from answering for
