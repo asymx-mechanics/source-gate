@@ -192,9 +192,9 @@ before.
 
 The owner merged #3 at 13:58:42 UTC on 2026-09-25. It held one commit
 (`e25b2b0`) and the description I wrote when I opened it. 47 seconds later,
-and again at 14:01 and 14:20, I rewrote that description to cover ten later
-commits on the same branch. Those commits were never part of the merge. I
-believed #3 was still open. [V: GitHub's `merged_at` and commit list for #3,
+and again at 14:01 and 14:20, I rewrote that description to cover the six
+commits I had pushed since then. Four more followed. None of the ten was part of
+the merge. I believed #3 was still open. [V: GitHub's `merged_at` and commit list for #3,
 and the session transcript]
 
 - **The edit tool did not show the state.** `update_pull_request` accepted
@@ -205,7 +205,7 @@ and the session transcript]
   forward. Reading the PR on 2026-09-25 (`merged: true`) corrected it. [V]
 
 Repair: #3's description was restored to the merged text, with a dated note
-on what happened. The ten commits went into a new pull request. The wrong
+on what happened. All ten commits went into a new pull request. The wrong
 versions presumably remain in the description's edit history [M]. Who can see
 that history is still an open loose end in `CLAUDE.md`.
 
