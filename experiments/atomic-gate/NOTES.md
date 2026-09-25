@@ -96,12 +96,13 @@ In this repository those ideas already have a home outside my reach, in
 GitHub's pull-request flow: a merge lands a specific head commit (from memory,
 not verified here), and the history of `main` is the record. But the flow has
 G16's problem too, at GitHub's scale. This session acts on GitHub as the owner's
-account: my probe push was recorded with actor `asymx-mechanics` (verified; see
-`../github-witness/NOTES.md`). I infer, but have not tested, that a merge I
-performed would be recorded like a merge the owner performed. If so, what
-separates "the human decided" from "the agent decided" here is my restraint,
-the Claude Code permission check, and the platform's session transcript. It is
-not GitHub's record.
+account. My probe push was recorded with actor `asymx-mechanics` and no app
+marker (verified; see `../github-witness/NOTES.md`). The pull request I opened
+does name the app (`performed_via_github_app: claude`, verified). So a merge
+performed through the app *might* be marked too, but that is untested. Until it
+is, what reliably separates "the human decided" from "the agent decided" here is
+my restraint, the Claude Code permission check, and the platform's session
+transcript, not GitHub's record.
 
 ## What I rejected, and why
 
