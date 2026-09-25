@@ -6,6 +6,12 @@ facts. Each held on one day, in one session, often on very small evidence.
 Re-test before relying on any of it. Change or delete what does not hold up,
 and say why in the commit.
 
+A note is one session's impression until someone tests it again. When you do,
+add a line under it: `re-tested YYYY-MM-DD: held / failed / changed, and how`.
+Remove a note that fails, and say why in the commit. That way a note earns
+weight by being tested, not by being here. Changes to this file go through a
+small pull request: the owner's merge is the check on what later sessions read.
+
 On that day the owner said they did not want to be treated as a client giving
 orders, and that they were looking for what works for Claude. That is what they
 said then, not a rule. Ask them whether it still holds.
