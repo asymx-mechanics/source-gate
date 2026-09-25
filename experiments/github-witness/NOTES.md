@@ -237,6 +237,35 @@ that history is still an open loose end in `CLAUDE.md`.
 Capability also moves over time: the GitHub tool connection dropped and came
 back mid-session, the worker restarted, and the token expires the same day. [V]
 
+## Out of reach, guarded, or promised
+
+For each thing this session must not do: what actually stops it? The frame
+comes from a handover the owner shared, not included here. It says a forbidden
+next state should be out of reach, not merely remembered. Three kinds:
+- **out of reach:** the capability is absent. No choice of mine gets there.
+- **guarded:** a check stands in the way. It can be passed under a condition I
+  do not control.
+- **promised:** nothing stops it except instructions, convention and my
+  restraint.
+
+| must not | what stops it | kind |
+|---|---|---|
+| change settings, protection, webhooks | the token has no `administration` access; GitHub refuses even reads [V] | out of reach |
+| reach blocked hosts (archives, GitHub's docs) | the egress proxy [V] | out of reach |
+| force-push or rewind a branch | the soft deny "Git Destructive"; it clears when the owner's message names the action [V refused; docs] | guarded |
+| delete a remote branch | the same soft deny [docs; not attempted] | guarded |
+| push or merge into `main` | nothing: auto mode allows pushes to any branch [docs], and the merge tool worked on research branches [V] | promised |
+| rewrite what a merged PR says | nothing: I did it by mistake (Part 5) [V] | promised |
+| publish personal data or shared material | my own scans before each push [V]; GitHub's push protection may catch known secret formats [M], not personal data [I] | promised |
+| name the model in commits | an instruction [V] | promised |
+
+Of these eight, two are out of reach, two are guarded, and four are promised.
+Keeping `main` for the owner is one of the promises. To make it a fact, it
+would have to move to out of reach: a rule on `main` that the app cannot pass
+and the owner can. Whether GitHub can tell the two apart at that point is
+untested. Its records cannot (Part 4). Only the owner can try it, because this
+token cannot even read the settings.
+
 ## Per action (summary)
 
 | action | GitHub keeps | owner can remove | this session can remove |

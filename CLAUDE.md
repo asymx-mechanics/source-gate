@@ -44,6 +44,11 @@ said then, not a rule. Ask them whether it still holds.
   anything into a repository, so there only the human can. What would make it
   a fact again: a separate identity for the agent, no merge right, or something
   else? (2026-09-25)
+  `Partial answer 2026-09-25:` of eight things this session must not do, two
+  are out of reach, two are guarded, and four are only promised, `main` among
+  them (table in `experiments/github-witness/NOTES.md`). A fact would need a
+  rule on `main` that the app cannot pass and the owner can. That is untested,
+  and only the owner can set it up.
 
 ## Corrections: things I said that were wrong or unsupported
 
@@ -117,6 +122,9 @@ reasons changed each time: one question, not performing, being prompted, the
 thread ending. After that I went through every loose end in one turn and
 stopped only when each one was either pulled or needed something from outside.
 That was prompted, so it is not an independent test.
+`Found by me, not pointed out (2026-09-25):` I acted on a fact that a context
+summary carried ("#3 is open") without reading the record. A fact in a summary
+is a memory, not an observation.
 
 ## Loose ends (noticed on 2026-09-25, not pursued)
 
