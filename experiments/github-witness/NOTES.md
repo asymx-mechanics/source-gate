@@ -199,6 +199,9 @@ and the session transcript]
 
 - **The edit tool did not show the state.** `update_pull_request` accepted
   each edit and answered only with the PR's id and URL. [V]
+- **Checking needs the right field.** `list_pull_requests` returned
+  `merged: false` for all four PRs here, the merged ones included. Only
+  `merged_at`, or a single-PR read (`merged: true`), shows the merge. [V]
 - **A description is not a record of what was merged.** After the merge it can
   be rewritten to say anything. The record is the commits and the merge commit. [V]
 - A context summary written later carried the same belief ("#3 is open")

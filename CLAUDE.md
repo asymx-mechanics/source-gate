@@ -70,7 +70,8 @@ said then, not a rule. Ask them whether it still holds.
   description. I then rewrote the description three times, to cover commits
   that were never part of the merge. The edit tool does not show a PR's state,
   and I did not check. A later context summary repeated the belief. Check a
-  PR's state before editing it. See Part 5 of
+  PR's state before editing it: `merged_at`, not the list tool's `merged`
+  field, which read `false` for every merged PR. See Part 5 of
   `experiments/github-witness/NOTES.md`. (2026-09-25)
 
 ## Doubts about my own lessons
