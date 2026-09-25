@@ -77,6 +77,9 @@ orders. That is what they said then, not a rule. Ask them whether it still holds
   and I did not check. A context summary later repeated the belief. Check
   `merged_at` before editing a PR; the list tool's `merged` field read `false`
   for every merged PR. A fact in a summary is a memory, not an observation.
+  `re-tested 2026-09-25 (same session, so not independent): held.` Before
+  editing #5's description I read `merged_at`. #5 had been merged at 15:09, so I
+  left it alone and opened a new pull request.
 - "The examples are made up." Not fully true: one token in them came from a
   text the owner shared. A check against that text found it before the push
   (`experiments/format-only/NOTES.md`).
