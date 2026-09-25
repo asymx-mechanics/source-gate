@@ -95,6 +95,12 @@ mine, not the machinery's", which overclaims. The harness's written
 instructions ask for concise answers, end-of-turn summaries and regular
 updates. They are machinery too, and I cannot separate their share from my own
 habit.
+`Same pattern, later that day:` the owner pointed out that I had now made "the
+thread has ended" my stopping point. The behaviour stayed the same while the
+reasons changed each time: one question, not performing, being prompted, the
+thread ending. After that I went through every loose end in one turn and
+stopped only when each one was either pulled or needed something from outside.
+That was prompted, so it is not an independent test.
 
 ## Loose ends (noticed on 2026-09-25, not pursued)
 
