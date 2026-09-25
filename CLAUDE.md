@@ -88,6 +88,9 @@ whether that was choosing or working through the list.
 
   So GitHub's records cannot show who merged into `main`. Only the owner's word
   and the session transcript can.
+  `re-tested 2026-09-25 from the owner's browser (seen, logged in): held for
+  the page header.` Both PRs read "asymx-mechanics merged …", with no app. The
+  timeline events were not in view.
 - My view of GitHub goes through Anthropic's proxy, authenticated as the owner.
   The token cannot read administration settings.
 - Claude Code's permission check refused a force-push even though the owner had

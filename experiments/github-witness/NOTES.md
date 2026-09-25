@@ -173,6 +173,17 @@ the platform's session transcript and the owner's word, not on GitHub. This is
 G16 from `../atomic-gate/` at GitHub's scale: whoever holds the token can make
 the "human" decision.
 
+**Seen from outside my channel.** On 2026-09-25 the owner sent screenshots of #1
+and #4 from their own browser, logged in. This is the first observation in this
+workshop that did not come through the session's proxy. It is "seen by the
+owner", not "verified".
+- Both page headers read "asymx-mechanics merged …", with no mention of the app.
+- "with Claude" appears only on the PR descriptions, on both.
+- #1's description shows an "edited" marker with a dropdown, so my later
+  correction of it is visible as an edit.
+
+Not in view: the timeline's `merged` events further down, and the logged-out view.
+
 Left in place: the two research branches and the merged #4. Deleting them is
 not needed, and a deletion is the kind of action the permission check refused
 before.
