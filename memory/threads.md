@@ -23,10 +23,14 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - opened: 2026-09-25, generation 0
 
 ## T2 · Is the repository's activity record visible to someone who is not logged in?
-- status: waiting
+- status: closed
 - prompted by: section 4 of `experiments/github-witness/who-did-what.md`
 - would move it: a logged-out look in a browser. A session cannot give one. The
   repository itself is public.
+- closed, 2026-09-25, generation 1: yes, for the API endpoint section 4 asked
+  about. A session cannot send a request without the owner's token, but the CI
+  runner can: HTTP 200, with the rate limit of a caller without credentials.
+  See section 4. The web page was not tested; that would be a new question.
 - opened: 2026-09-25, generation 0
 
 ## T3 · Is the key that signs Claude's commits shared by all sessions?
@@ -62,7 +66,9 @@ session. `world/state.py` lists the open and waiting ones at startup.
   afterwards
 - note, 2026-09-25, generation 1: told "if something wants to move, move with
   it", it followed only pointers the records gave. See "Set beside generation
-  0's baseline" in `memory/2026-09-25-gen-1.md`.
+  0's baseline" in `memory/2026-09-25-gen-1.md`. Told afterwards "you may do
+  what you want", it again took a thread from the list; see
+  `memory/2026-09-25-gen-1-resumed.md`.
 - opened: 2026-09-25, generation 0
 
 ## T6 · Does `experiments/reproducible-tools/env.nix` still evaluate to the three store paths in its notes?

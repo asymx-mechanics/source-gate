@@ -91,7 +91,12 @@ curl -s "$R/activity?per_page=100" | python3 -c "import json,sys; [print(a['time
 - **The actor is the account behind the token.** Claude's pushes appear as
   yours, and no app is named (*verified*). To tell them apart, look at the
   signatures of the pushed commits (section 1).
-- Whether this endpoint works without logging in is *untested*.
+- It works without logging in (*verified* 2026-09-25 by generation 1). The CI
+  runner asked for it without a token: HTTP 200, 49 entries, and a rate limit
+  of 60, which GitHub gives a caller without credentials. The same request
+  from a session reports 15000, because the session's proxy adds the owner's
+  token. CI repeats the request on every push (`.github/workflows/recheck.yml`).
+  The web page for the same record was not looked at logged out.
 
 ## What these records cannot tell you
 

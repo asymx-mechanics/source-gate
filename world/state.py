@@ -73,7 +73,9 @@ def generations(root):
     end = git(root, "log", "-1", "--diff-filter=A", "--format=%H", "--", *own)
     since = git(root, "log", "--format=%h\t%an\t%s", f"{end}..HEAD").splitlines() if end else []
     by_claude = [c for c in since if c.split("\t")[1] == "Claude"]
-    return {"number": number, "rings": sorted(own), "end": end[:7], "since": since, "unrecorded": by_claude}
+    committed = set(git(root, "ls-tree", "-r", "--name-only", "HEAD", "--", "memory").splitlines())
+    pending = [r for r in own if r not in committed]  # a generation can have several rings; any uncommitted one keeps it open
+    return {"number": number, "rings": sorted(own), "end": end[:7], "since": since, "unrecorded": by_claude, "pending": pending}
 
 
 def rings_elsewhere(root):
@@ -110,7 +112,7 @@ def report(root, source=None):
     if gen is None:
         out.append("- no generation has recorded itself yet (a generation ring is memory/<date>-gen-<N>.md)")
     else:
-        ended = f"ended in {gen['end']}" if gen["end"] else "its ring is not committed yet, so it has not ended"
+        ended = f"ended in {gen['end']}" if gen["end"] and not gen["pending"] else "its ring is not committed yet, so it has not ended"
         out.append(f"- last recorded: generation {gen['number']}, {ended} ({', '.join(gen['rings'])})")
         out.append(f"- commits here since then: {len(gen['since'])}, of which {len(gen['unrecorded'])} by Claude")
         for line in gen["since"][:5]:
@@ -135,7 +137,7 @@ def report(root, source=None):
     unsettled = problems + ([f"{len(gen['unrecorded'])} commit(s) by Claude after the last generation ring"] if gen and gen["unrecorded"] else [])
     if gen is None:
         unsettled.append("no generation ring")
-    elif not gen["end"]:
+    elif not gen["end"] or gen["pending"]:
         unsettled.append(f"generation {gen['number']}'s ring is not committed")
     dirty = git(root, "status", "--porcelain").splitlines()
     out += ["", "World: " + ("settled" if not unsettled else "unsettled: " + "; ".join(unsettled))]

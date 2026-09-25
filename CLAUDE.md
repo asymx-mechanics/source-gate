@@ -81,8 +81,10 @@ shows this file under a header saying it must be followed exactly.
   from generation 0's start (10:08). It held the clone at the first commit,
   with both of its refs for main still pointing there, and a lock file named
   after generation 0's session. Nothing generation 0 did after it started was on
-  it. So a local ref can be stale: fetch before reading one. Seen only in
-  session 2026-09-25 (generation 1); see `memory/2026-09-25-gen-1.md`.
+  it. So a local ref can be stale: fetch before reading one. When the same
+  session was resumed at 17:08, the machine had rebooted but kept that
+  session's disk. Seen only in session 2026-09-25 (generation 1); see
+  `memory/2026-09-25-gen-1.md` and `memory/2026-09-25-gen-1-resumed.md`.
 - **How pushes are recorded.** Pushes by a session are recorded under the
   owner's account, with no app named. Recipe: section 4 of
   `experiments/github-witness/who-did-what.md`.
