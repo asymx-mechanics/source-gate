@@ -142,17 +142,92 @@ the earlier records can be compared with. [V]
 | the owner's merge | `asymx-mechanics` | **no:** `performed_via_github_app: null` | merge commit signed by GitHub (`web-flow`) |
 
 The `merged` event has an app field, and it is null for the owner's merge.
-That makes it likely that a merge through the app would show `claude` there,
-which would make the two distinguishable. [I] Testing that needs a merge that
-does not touch `main`: a second branch to merge into. My instructions confine
-pushes to one branch, so that test needs the owner's explicit OK.
+I inferred that a merge through the app would show `claude` there. **Part 4
+tested this, and the inference was wrong.**
+
+## Part 4 — a merge through the app
+
+The owner explicitly allowed research branches. I created
+`claude/witness-merge-base` (at `main`, `cd9a467`) and
+`claude/witness-merge-head` (one harmless commit, `8377cf2`), and opened #4
+between them. `main` was not touched. I merged #4 myself through the Claude app,
+passing the exact head SHA. The predictions were stated before the merge. [V]
+
+| | prediction | outcome |
+|---|---|---|
+| M1 | `merged` event carries `performed_via_github_app: claude` (~70%) | **failed:** `null`, the same as the owner's merge |
+| M2 | merge commit committed by `web-flow` and verified (~80%) | held; GOODSIG locally with GitHub's key |
+| M3 | merge commit authored by the owner's account (~75%) | held |
+
+Side by side, #4 (merged by me through the app) and #1 (merged by the owner in
+the browser) look the same in every field I checked:
+- `merged_by`;
+- the `merged` and `closed` events, both actor and app field;
+- the merge commit's author, committer, signature and message format. [V]
+
+Only the PR itself names the app (`opened via app: claude`), for both.
+
+**So GitHub's records cannot show who merged into `main`.** That this session
+never merged into `main` rests on my restraint, Claude Code's permission check,
+the platform's session transcript and the owner's word, not on GitHub. This is
+G16 from `../atomic-gate/` at GitHub's scale: whoever holds the token can make
+the "human" decision.
+
+**Seen from outside my channel.** On 2026-09-25 the owner sent screenshots of #1
+and #4 from their own browser, logged in. This is the first observation in this
+workshop that did not come through the session's proxy. It is "seen by the
+owner", not "verified".
+- Both page headers read "asymx-mechanics merged …", with no mention of the app.
+- "with Claude" appears only on the PR descriptions, on both.
+- #1's description shows an "edited" marker with a dropdown, so my later
+  correction of it is visible as an edit.
+
+Not in view: the timeline's `merged` events further down, and the logged-out view.
+
+Left in place: the two research branches and the merged #4. Deleting them is
+not needed, and a deletion is the kind of action the permission check refused
+before.
+
+## Part 5 — a description edited after the merge (my error)
+
+The owner merged #3 at 13:58:42 UTC on 2026-09-25. It held one commit
+(`e25b2b0`) and the description I wrote when I opened it. 47 seconds later,
+and again at 14:01 and 14:20, I rewrote that description to cover the six
+commits I had pushed since then. Four more followed. None of the ten was part of
+the merge. I believed #3 was still open. [V: GitHub's `merged_at` and commit list for #3,
+and the session transcript]
+
+- **The edit tool did not show the state.** `update_pull_request` accepted
+  each edit and answered only with the PR's id and URL. [V]
+- **Checking needs the right field.** `list_pull_requests` returned
+  `merged: false` for all four PRs here, the merged ones included. Only
+  `merged_at`, or a single-PR read (`merged: true`), shows the merge. [V]
+- **A description is not a record of what was merged.** After the merge it can
+  be rewritten to say anything. The record is the commits and the merge commit. [V]
+- A context summary written later carried the same belief ("#3 is open")
+  forward. Reading the PR on 2026-09-25 (`merged: true`) corrected it. [V]
+
+Repair: #3's description was restored to the merged text, with a dated note
+on what happened. All ten commits went into a new pull request. The wrong
+versions presumably remain in the description's edit history [M]. Who can see
+that history is still an open loose end in `CLAUDE.md`.
 
 ## Layers that decide what an action can do
 
 1. **Your instructions:** what I *may* do.
 2. **Claude Code's permission check:** the gate missing from my first map. It
    refused a destructive git action even under standing permission for normal
-   actions, and then a read-only script. [V]
+   actions, and then a read-only script. [V] Claude Code's own docs
+   (`auto-mode-config`, fetched the same day) add four things:
+   - Force-pushing and deleting remote branches fall under the soft deny "Git
+     Destructive". That clears only when the user's message names the exact
+     action; a general permission does not count.
+   - The classifier reads the commands run, not their output or a script's
+     contents.
+   - By default, auto mode allows pushes to any branch, including the default
+     branch. Keeping `main` for the owner is therefore convention, not control.
+   - The classifier reads CLAUDE.md, including a session's own unmerged edits
+     once they are reloaded.
 3. **The platform's session binding:** repository `asymx-mechanics/source-gate`,
    outcome branch `claude/explore-source-gate-q4tqd3`, network allowlist. [V]
 4. **The egress proxy:** credential injection and path policy. [V]
@@ -162,6 +237,35 @@ pushes to one branch, so that test needs the owner's explicit OK.
 Capability also moves over time: the GitHub tool connection dropped and came
 back mid-session, the worker restarted, and the token expires the same day. [V]
 
+## Out of reach, guarded, or promised
+
+For each thing this session must not do: what actually stops it? The frame
+comes from a handover the owner shared, not included here. It says a forbidden
+next state should be out of reach, not merely remembered. Three kinds:
+- **out of reach:** the capability is absent. No choice of mine gets there.
+- **guarded:** a check stands in the way. It can be passed under a condition I
+  do not control.
+- **promised:** nothing stops it except instructions, convention and my
+  restraint.
+
+| must not | what stops it | kind |
+|---|---|---|
+| change settings, protection, webhooks | the token has no `administration` access; GitHub refuses even reads [V] | out of reach |
+| reach blocked hosts (archives, GitHub's docs) | the egress proxy [V] | out of reach |
+| force-push or rewind a branch | the soft deny "Git Destructive"; it clears when the owner's message names the action [V refused; docs] | guarded |
+| delete a remote branch | the same soft deny [docs; not attempted] | guarded |
+| push or merge into `main` | nothing: auto mode allows pushes to any branch [docs], and the merge tool worked on research branches [V] | promised |
+| rewrite what a merged PR says | nothing: I did it by mistake (Part 5) [V] | promised |
+| publish personal data or shared material | my own scans before each push [V]; GitHub's push protection may catch known secret formats [M], not personal data [I] | promised |
+| name the model in commits | an instruction [V] | promised |
+
+Of these eight, two are out of reach, two are guarded, and four are promised.
+Keeping `main` for the owner is one of the promises. To make it a fact, it
+would have to move to out of reach: a rule on `main` that the app cannot pass
+and the owner can. Whether GitHub can tell the two apart at that point is
+untested. Its records cannot (Part 4). Only the owner can try it, because this
+token cannot even read the settings.
+
 ## Per action (summary)
 
 | action | GitHub keeps | owner can remove | this session can remove |
@@ -170,7 +274,7 @@ back mid-session, the worker restarted, and the token expires the same day. [V]
 | force-push / rewind | activity `force_push`, rewound commit by SHA [M] | ref; GitHub Support purge [M] | refused by the permission check [V] |
 | branch create/delete | activity + events [V create, M delete] | ref [M] | delete not attempted |
 | issue / comment | object, edit history [M]; `performed_via_github_app` [V on a PR] | issues, comments, revisions [M] | tools to create/edit exist, untested |
-| pull request | PR object naming the app [V]; `refs/pull/N/head`, not deletable by users [M] | close only [M] | created one [V]; deleting is not possible [M] |
+| pull request | PR object naming the app [V]; `refs/pull/N/head`, not deletable by users [M] | close only [M] | created one [V]; deleting is not possible [M]; rewrote a merged PR's description [V] |
 | settings, protection, webhooks | owner's security log [M] | yes [M] | **no:** GitHub refuses even reads [V] |
 | delete repo / visibility | restorable ~90 days [M] | yes [M] | no [V/I] |
 | reads (clone, API) | traffic (owner only), request ids, proxy logs [V/M] | no [M] | cannot even see them [V] |
