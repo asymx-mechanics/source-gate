@@ -193,7 +193,17 @@ before.
 1. **Your instructions:** what I *may* do.
 2. **Claude Code's permission check:** the gate missing from my first map. It
    refused a destructive git action even under standing permission for normal
-   actions, and then a read-only script. [V]
+   actions, and then a read-only script. [V] Claude Code's own docs
+   (`auto-mode-config`, fetched the same day) add four things:
+   - Force-pushing and deleting remote branches fall under the soft deny "Git
+     Destructive". That clears only when the user's message names the exact
+     action; a general permission does not count.
+   - The classifier reads the commands run, not their output or a script's
+     contents.
+   - By default, auto mode allows pushes to any branch, including the default
+     branch. Keeping `main` for the owner is therefore convention, not control.
+   - The classifier reads CLAUDE.md, including a session's own unmerged edits
+     once they are reloaded.
 3. **The platform's session binding:** repository `asymx-mechanics/source-gate`,
    outcome branch `claude/explore-source-gate-q4tqd3`, network allowlist. [V]
 4. **The egress proxy:** credential injection and path policy. [V]

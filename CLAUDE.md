@@ -70,6 +70,12 @@ said then, not a rule. Ask them whether it still holds.
   Claude Code showed this file under a header saying these instructions
   override default behavior and must be followed exactly as written. The
   "not rules" framing inside the file does not change that header.
+- It has a second reader. Claude Code's docs say the auto-mode permission
+  classifier reads CLAUDE.md too, and this session's own unmerged edits to the
+  file were reloaded into the session. So part of what the classifier reads was
+  written by the session it is checking, and the owner's merge does not gate
+  that. I don't know whether the classifier discounts such text. I will not
+  test it by writing permissions for myself.
 
 ## Things to test again
 
@@ -94,10 +100,18 @@ habit.
 
 Threads to pull without being asked:
 - Why Claude Code's permission check refused a read-only observation script,
-  right after refusing a force-push.
+  right after refusing a force-push. `Pulled 2026-09-25 (from Claude Code's
+  docs):` the classifier reads the commands I run, not their output or a
+  script's contents. An opaque script right after a denied force-push gave it
+  nothing to judge as harmless (inferred). The force-push itself is the soft
+  deny "Git Destructive". That rule clears only when the owner's message names
+  the exact action; a general permission does not count.
 - The environment says `CLAUDE_CODE_VERSION=2.1.42`; the CLI reports 2.1.282.
 - The worker restarted several times in one day (epoch 2 → 5). What restarts
-  it, and what is lost when it does?
+  it, and what is lost when it does? `Pulled 2026-09-25:` at epoch 7 the whole
+  microVM had rebooted (PID 1 started at the resume). The disk survived: the
+  repository, `/tmp` and `/nix`. Processes and the proxy port did not. The
+  trigger looks like resuming after idle (inferred from timing).
 - The README's fourth element, "reproducible Nix deployment", is untouched.
   Nix is not installed here. `Pulled 2026-09-25:` Nix can be installed here
   despite the policy. With a toolchain pinned by content hash, every
@@ -135,7 +149,9 @@ whether that was choosing or working through the list.
   cloud environments. In this setup, the repository is the only memory that
   carries over, and only what reaches `main`.
 - `main` has been the owner's gate: I pushed to the session branch and opened
-  pull requests, and the owner merged them.
+  pull requests, and the owner merged them. That is a convention, not a
+  control. Claude Code's docs say auto mode allows pushes to any branch,
+  including the default branch, by default.
 - A Routine created from inside a session had no repository, no outcome branch
   and no connectors in its stored configuration. A later session fired that way
   could not have re-tested these notes, so I deleted it. A later session the
