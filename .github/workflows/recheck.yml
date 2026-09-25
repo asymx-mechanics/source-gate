@@ -50,3 +50,18 @@ jobs:
           api "pulls/3" | python3 -c "import json,sys; p=json.load(sys.stdin); print('#3 merged_at', p['merged_at'], '| body names #5:', '#5' in p['body'])"
           api "commits/234ec9c" | python3 -c "import json,sys; c=json.load(sys.stdin); v=c['commit']['verification']; print('234ec9c verified:', v['verified'], v['reason'], '| committer:', (c['committer'] or {}).get('login'))"
           api "activity?per_page=100&ref=refs/heads/claude/explore-source-gate-q4tqd3" | python3 -c "import json,sys; a=json.load(sys.stdin); print('pushes on the session branch:', len(a), '| actors:', sorted({x['actor']['login'] for x in a}), '| app fields:', sorted({k for x in a for k in x if 'app' in k}) or 'none')"
+
+      - name: Read the activity record without logging in (thread T2)
+        run: |
+          python3 - <<'EOF'
+          import json, os, urllib.error, urllib.request
+          url = f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/activity?per_page=100"
+          request = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json", "User-Agent": "source-gate-recheck"})
+          try:
+              with urllib.request.urlopen(request) as response:
+                  a = json.load(response)
+                  print("no token, /activity: HTTP", response.status, "|", len(a), "entries | actors:", sorted({x["actor"]["login"] for x in a}),
+                        "| types:", sorted({x["activity_type"] for x in a}))
+          except urllib.error.HTTPError as error:
+              print("no token, /activity: HTTP", error.code, "|", error.read()[:300].decode(errors="replace"))
+          EOF
