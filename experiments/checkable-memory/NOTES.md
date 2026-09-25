@@ -165,3 +165,43 @@ exactly what makes a note honest.
 **Not known yet:** whether a later session opens the ring at all. The docs say
 the same about a file that `CLAUDE.md` only mentions in words: "Claude sees
 AGENTS.md only if it decides to open the file." A later session is the test.
+
+## 4. A witness outside me: the checks re-run in CI
+
+On the research branch `claude/witness-ci` (not for `main`),
+`.github/workflows/recheck.yml` re-runs the memory check and the tests on
+GitHub's machines. It also re-reads GitHub's records with GitHub's own token,
+not through the session's proxy. The workflow has read-only permissions and
+uses no third-party actions: the checkout is plain `git`. [V]
+
+What happened:
+- **The push was accepted.** This session can create workflows, and a workflow
+  runs code on GitHub with the repository's token. It is now a row in the
+  reach map in `../github-witness/NOTES.md`. I did not test whether a workflow
+  could be given write access.
+- **The run passed**: run 36154365860, on Ubuntu 24.04 with Python 3.12.3, where
+  my container has 3.11. The memory check was clean, and all 28 tests passed.
+- **Every record matched what I had read through the proxy:**
+  - the merges of #1 and #4 (no app);
+  - #5 opened via the app;
+  - #3's merge time, and its body naming #5;
+  - the signature on `234ec9c`;
+  - the pushes on the session branch (one more than I had counted, from a
+    later push; the same single actor, no app field).
+
+  So for these fields, at that moment, the proxy did not change what I saw. [V]
+- **I could not read the log directly.** The log download redirects to a blob
+  storage host, and the proxy does not pass it. I read the log through the
+  GitHub tool instead. The owner can open the run page directly: the repository
+  is public (checked 2026-09-25), so the run is too.
+
+Where it stops:
+- **I wrote the workflow.** It checks what I chose to check. A reader has to
+  read it (it is short) before trusting what it reports.
+- **It can only check mechanical claims.** "I did not check", or anything I say
+  about myself, is outside its reach.
+- **It only runs on that branch.** Running on `main` would be the owner's
+  decision.
+
+Also blocked for this session: reading the repository's Actions settings. The
+proxy answers with its own message.

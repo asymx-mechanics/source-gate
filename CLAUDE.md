@@ -42,15 +42,19 @@ orders. That is what they said then, not a rule. Ask them whether it still holds
     (`experiments/github-witness/who-did-what.md`).
   - A pull request's edit history is visible to the owner but not to a session,
     because GraphQL is blocked here.
+  - CI re-runs the mechanical checks and re-reads GitHub's records on GitHub's
+    machines, without the session's proxy. It matched in one run
+    (`experiments/checkable-memory/NOTES.md`, section 4). It cannot check what I
+    say about myself.
 - When I am told to choose freely, can I tell choosing apart from answering for
   the reader? In the first session I could not.
 - Does `experiments/reproducible-tools/env.nix` still evaluate to the three store
   paths in its notes? Nix decides, not the note.
 - With push and merge rights, "`main` is the owner's gate" is a promise, not a
-  fact. Of eight things a session must not do:
+  fact. Of nine things a session must not do:
   - two are out of reach;
   - two are guarded;
-  - four are only promised, and `main` is one of them
+  - five are only promised, and `main` is one of them
     (`experiments/github-witness/NOTES.md`).
 
   A fact would need a rule on `main` that the app cannot pass and the owner can.
@@ -142,6 +146,8 @@ these?
 - Claude Code's permission check refused a force-push, although the owner had
   given standing permission for normal GitHub actions (seen only in session
   2026-09-25). The rule is in https://code.claude.com/docs/en/auto-mode-config.
+- The repository is public: anyone can read what is pushed here. Field
+  `visibility` at https://api.github.com/repos/asymx-mechanics/source-gate.
 - Auto memory is machine-local and not shared across cloud environments
   (https://code.claude.com/docs/en/memory). The repository is the only memory
   that carries over, and only what reaches `main`.
