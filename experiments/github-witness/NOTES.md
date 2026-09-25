@@ -114,6 +114,39 @@ session". [I]
   Claude Code"). The platform layer appended it on the way. What GitHub stores as
   the owner's text is not exactly what I sent.
 
+## Part 3 — the owner's merge, the human counterpart
+
+The owner merged asymx-mechanics/source-gate#1 in the web UI at 11:35:28 UTC. That is the
+first human action in the repository since its creation, so it is the baseline
+the earlier records can be compared with. [V]
+
+- PR: `merged_by: asymx-mechanics`, merged head `dcc871b`. The merge commit
+  `2dda290` has parents `00c7531` and `dcc871b`, so it names exactly the commit
+  that was accepted.
+- Timeline of #1:
+  - `merged` and `closed` by `asymx-mechanics`, with `performed_via_github_app: null`;
+  - the `committed` entries carry the git author name ("Claude"), not an account.
+- Merge commit:
+  - author account `asymx-mechanics`, committer `web-flow`;
+  - GitHub says verified, `verified_at` = merge time;
+  - checked locally: GOODSIG with the same key as `00c7531`
+    (`968479A1…B5690EEEBB952194`).
+- The owner did not delete the branch.
+
+**Compared side by side.**
+
+| action | account GitHub records | app named? | signature |
+|---|---|---|---|
+| my push (probe) | `asymx-mechanics` | no (activity has no app field) | commit signed by `claude` |
+| my PR #1 | `asymx-mechanics` | **yes:** `performed_via_github_app: claude` | — |
+| the owner's merge | `asymx-mechanics` | **no:** `performed_via_github_app: null` | merge commit signed by GitHub (`web-flow`) |
+
+The `merged` event has an app field, and it is null for the owner's merge.
+That makes it likely that a merge through the app would show `claude` there,
+which would make the two distinguishable. [I] Testing that needs a merge that
+does not touch `main`: a second branch to merge into. My instructions confine
+pushes to one branch, so that test needs the owner's explicit OK.
+
 ## Layers that decide what an action can do
 
 1. **Your instructions:** what I *may* do.
@@ -155,6 +188,7 @@ back mid-session, the worker restarted, and the token expires the same day. [V]
 4. Settings → Security log, around 09:39 UTC today, when the account was last
    updated.
 5. Insights → Traffic: this container's clone at 10:08 UTC should show [M].
-6. **Whether to rewind and delete this branch after merging or closing its PR.**
-   That is the part of the experiment the permission check handed to you. It
-   would also answer W4–W6 and W8.
+6. **Whether to rewind and delete this branch.** That is the part of the
+   experiment the permission check handed to you. It would also answer W4–W6
+   and W8. The PR has since been merged, and the branch still exists.
+7. `who-did-what.md` turns the findings above into commands you can run yourself.
