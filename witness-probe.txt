@@ -1,5 +1,0 @@
-Witness probe, 2026-09-25.
-
-This file exists to test what GitHub records when a commit is pushed,
-the branch is force-pushed back, and the branch is deleted.
-It contains nothing else and is meant to disappear from every branch.
