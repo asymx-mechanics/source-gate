@@ -19,16 +19,19 @@ symbols, emoji. An underscore inside a word stays part of the word.
 
 ## Results
 
-- 11 tests (`python3 -B -m unittest`) pass. Eight show what is caught, or
-  correctly passed as format. Three document blind spots.
-- All tests passed on the first run, so I broke the checker five ways:
+- 14 tests (`python3 -B -m unittest`) pass:
+  - eight show what is caught, or correctly passed as format;
+  - three document blind spots;
+  - three are about summaries (see the section below).
+- All tests passed on the first run, so I broke the checker six ways:
   - ignoring case;
   - stripping punctuation;
   - removing every underscore;
   - ignoring word order;
-  - keeping markdown markers.
+  - keeping markdown markers;
+  - hiding pure deletions.
 
-  The tests caught all five. [V]
+  The tests caught all six. [V]
 - **Real use.** Source: the pull-request text I sent for #4, taken verbatim
   from the session transcript. Output: the text GitHub stored. The checker
   found exactly one change: the footer the platform appended
@@ -51,8 +54,36 @@ Blind spots, each kept as a passing test:
 - **Line breaks do not count**, although in a poem or a song they carry rhythm.
 - **A `*` used as a symbol is stripped** like emphasis.
 
-The larger limit is not in the code. **Words can be anchored to a source;
-meaning cannot.** This can prove that a "reformatted" text still says the same
-words in the same order. It cannot prove that a summary, an interpretation or a
-new framing is faithful. That judgement stays with a human, which is where the
-rest of this repository keeps ending up too.
+The larger limit is not in the code. This check can prove two things: that a
+"reformatted" text still has the same words in the same order, and what a
+summary dropped (next section). It cannot prove that a paraphrase, an
+interpretation or a new framing is faithful. That judgement stays with a human,
+which is where the rest of this repository keeps ending up too.
+
+## Summaries: what a copy dropped
+
+I first wrote: "Words can be anchored to a source; meaning cannot." That was too
+strong. A hedge ("possibly") and a condition ("but only on …") are carried by
+words. A summary that drops them drops those words. Three tests, with made-up
+sentences:
+- **A dropped hedge is listed** as lost.
+- **Compare with the source, not with the last copy.** In the test, one copy
+  loses the hedge and the next copy loses the condition. Comparing each copy
+  with the one before shows only the last loss; comparing with the source shows
+  both.
+- **A paraphrase is only a replacement.** "may reduce … on some machines"
+  replaces the hedge and the condition. The checker pairs "machines with more
+  than 8 GB of memory." with "some machines.", which makes the loss easy to
+  see. Whether that loss matters is still for a human to judge.
+
+So the check does not decide whether a summary is faithful. It gives a human
+the list of what was dropped or replaced, and that list is shorter than the
+source. Meaning carried by particular words can be anchored; meaning carried by
+a paraphrase cannot.
+
+My predictions, registered before the run, were 95%, 90% and 75%. All three
+held. They were about code I had just written, so they say little. [V]
+
+This part was prompted by a later handover from the owner, not included here.
+It describes how uncertainty disappears when a claim passes through several AI
+summaries.

@@ -59,5 +59,30 @@ class WhatItCannotSee(unittest.TestCase):
         self.assertEqual(word_changes("rating *", "rating"), [])
 
 
+HEDGED = "The fix possibly reduces crashes, but only on machines with more than 8 GB of memory."
+
+
+class SummariesShowWhatTheyDropped(unittest.TestCase):
+    """A hedge or a condition is carried by words, so dropping it is visible, if compared with the source."""
+
+    def lost(self, source, output):
+        return " ".join(old for op, old, new in word_changes(source, output) if op in ("delete", "replace"))
+
+    def test_a_dropped_hedge_is_listed(self):
+        self.assertIn("possibly", self.lost(HEDGED, HEDGED.replace("possibly ", "")))
+
+    def test_loss_spread_over_copies_shows_only_against_the_source(self):
+        first = HEDGED.replace("possibly ", "")
+        second = "The fix reduces crashes."
+        self.assertNotIn("possibly", self.lost(first, second))
+        self.assertIn("possibly", self.lost(HEDGED, second))
+        self.assertIn("only", self.lost(HEDGED, second))
+
+    def test_a_paraphrased_hedge_is_only_a_replacement(self):
+        """Whether "may" kept "possibly", and "some machines" the condition, is for a human to judge."""
+        changes = word_changes(HEDGED, "The fix may reduce crashes on some machines.")
+        self.assertEqual({op for op, old, new in changes}, {"replace"})
+
+
 if __name__ == "__main__":
     unittest.main()
