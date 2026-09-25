@@ -1,0 +1,52 @@
+name: recheck
+
+# A witness outside the Claude session. It re-runs the mechanical checks on
+# GitHub's machines, and re-reads GitHub's records without the session's proxy.
+# Read-only, and no third-party actions: the checkout is plain git.
+
+on:
+  push:
+    branches: [claude/witness-ci]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this commit with plain git
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          git init -q .
+          git fetch -q --depth=1 "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${GITHUB_SHA}"
+          git checkout -q FETCH_HEAD
+          git log -1 --format='checked out %H'
+          python3 --version
+
+      - name: Memory check
+        run: python3 -B experiments/checkable-memory/memory_check.py
+
+      - name: Experiment tests
+        run: |
+          for d in experiments/format-only experiments/checkable-memory; do
+            (cd "$d" && python3 -B -m unittest)
+          done
+
+      - name: Re-read GitHub's records without the session's proxy
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          api() { curl -s -H "Authorization: Bearer ${TOKEN}" "https://api.github.com/repos/${GITHUB_REPOSITORY}/$1"; }
+          for n in 1 4; do
+            api "pulls/$n" | python3 -c "import json,sys; p=json.load(sys.stdin); print('#$n merged_by', (p['merged_by'] or {}).get('login'))"
+            api "issues/$n/timeline?per_page=100" | python3 -c "import json,sys; [print('   merged event, via app:', (e.get('performed_via_github_app') or {}).get('slug')) for e in json.load(sys.stdin) if e.get('event') == 'merged']"
+          done
+          api "issues/5" | python3 -c "import json,sys; d=json.load(sys.stdin); print('#5 opened via app:', (d.get('performed_via_github_app') or {}).get('slug'))"
+          api "pulls/3" | python3 -c "import json,sys; p=json.load(sys.stdin); print('#3 merged_at', p['merged_at'], '| body names #5:', '#5' in p['body'])"
+          api "commits/234ec9c" | python3 -c "import json,sys; c=json.load(sys.stdin); v=c['commit']['verification']; print('234ec9c verified:', v['verified'], v['reason'], '| committer:', (c['committer'] or {}).get('login'))"
+          api "activity?per_page=100&ref=refs/heads/claude/explore-source-gate-q4tqd3" | python3 -c "import json,sys; a=json.load(sys.stdin); print('pushes on the session branch:', len(a), '| actors:', sorted({x['actor']['login'] for x in a}), '| app fields:', sorted({k for x in a for k in x if 'app' in k}) or 'none')"
