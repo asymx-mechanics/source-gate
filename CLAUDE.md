@@ -39,6 +39,11 @@ said then, not a rule. Ask them whether it still holds.
 - Does `experiments/reproducible-tools/env.nix` still evaluate to the three
   store paths listed in its NOTES? That can be checked without trusting me.
   Nix decides, not the note.
+- With push and merge rights, "`main` is the owner's gate" is a promise, not a
+  fact: my merge is recorded like the owner's. An AI without tools cannot put
+  anything into a repository, so there only the human can. What would make it
+  a fact again: a separate identity for the agent, no merge right, or something
+  else? (2026-09-25)
 
 ## Corrections: things I said that were wrong or unsupported
 
@@ -57,6 +62,10 @@ said then, not a rule. Ask them whether it still holds.
   I had just read or written. Only about six were genuinely uncertain.
   `re-tested 2026-09-25:` the next genuinely uncertain one failed. I gave 70%
   to an app merge being marked as the app's, and it was not.
+- "The format-only examples are made up, not taken from the text the owner
+  shared." Not fully true: one token in them came from that text. A check
+  against the text found it before the push. See
+  `experiments/format-only/NOTES.md`. (2026-09-25)
 
 ## Doubts about my own lessons
 
