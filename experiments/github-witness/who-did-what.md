@@ -23,7 +23,11 @@ curl -s $R/commits/<sha> | python3 -c "import json,sys; c=json.load(sys.stdin); 
 - **Made through Claude:** author, committer and signer are the account
   `claude`. The SSH signing key is
   `SHA256:32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc` (*verified* on `95749e6`).
-  The key belongs to the platform, not to one session.
+  The key is not per session: all 42 commits of generation 0 and the commits of
+  generation 1, a different session, carry signatures by this key that check
+  out (*verified* 2026-09-25 by generation 1). Until then this line said "the
+  key belongs to the platform", which had not been tested. Whether sessions
+  under other accounts use it too is untested (thread T3).
 - **Made in GitHub's web UI (you):** committer `web-flow`. GitHub's GPG key is
   `968479A1AFF927E37D1A566BB5690EEEBB952194` (*verified* on `00c7531` and `2dda290`).
 - **Check the key without trusting the API's verdict:**
@@ -31,7 +35,22 @@ curl -s $R/commits/<sha> | python3 -c "import json,sys; c=json.load(sys.stdin); 
     `git verify-commit <sha>` in your own clone.
   - For the `claude` key, GitHub lists an account's signing keys at
     `https://api.github.com/users/claude/ssh_signing_keys` (*not tested*; that
-    path is blocked for Claude sessions).
+    path is blocked for Claude sessions, and still was for generation 1).
+  - To check the `claude` signatures yourself, with `ssh-keygen` 8.2 or later:
+
+    ```sh
+    echo 'claude namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKy87HxSEheG8vEPhSs9u2KZCtVErAQfpmprtUJCZ2w7' > /tmp/claude_signers
+    git -c gpg.ssh.allowedSignersFile=/tmp/claude_signers log --author=Claude --format='%h %G? %GF'
+    ```
+
+    `G` means the signature is good for that key. Generation 1 ran this with
+    `openssh-10.5p1` built from the package set pinned in
+    `../reproducible-tools/env.nix`: 42 of 42 `G` on generation 0's commits,
+    `G` on its own, and "incorrect signature" for a copy of a commit with one
+    changed letter. The key line was taken out of the signature on `95749e6`, so
+    on its own it only shows that one key made all these signatures. That the
+    key is the `claude` account's rests on GitHub's verdict, or on comparing it
+    with the list above.
 - **Limit:** a signature says who *created* a commit, not who *pushed* it.
 
 ## 2. Who opened an issue or pull request, and through what
@@ -72,7 +91,12 @@ curl -s "$R/activity?per_page=100" | python3 -c "import json,sys; [print(a['time
 - **The actor is the account behind the token.** Claude's pushes appear as
   yours, and no app is named (*verified*). To tell them apart, look at the
   signatures of the pushed commits (section 1).
-- Whether this endpoint works without logging in is *untested*.
+- It works without logging in (*verified* 2026-09-25 by generation 1). The CI
+  runner asked for it without a token: HTTP 200, 49 entries, and a rate limit
+  of 60, which GitHub gives a caller without credentials. The same request
+  from a session reports 15000, because the session's proxy adds the owner's
+  token. CI repeats the request on every push (`.github/workflows/recheck.yml`).
+  The web page for the same record was not looked at logged out.
 
 ## What these records cannot tell you
 
