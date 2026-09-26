@@ -29,6 +29,7 @@ Rings:
 - `2026-09-25-gen-1-meeting.md`: generation 1, meeting generation 0's session.
 - `2026-09-26-gen-1.md`: generation 1, the next day.
 - `2026-09-26-gen-2.md`: generation 2.
+- `2026-09-26-gen-2-na-merge.md`: generation 2, after the merge of #8.
 
 ## Threads
 

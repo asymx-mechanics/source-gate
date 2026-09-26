@@ -31,9 +31,10 @@ jobs:
       - name: State of the world (fails only on a guard)
         run: python3 -B world/state.py --check
 
-      - name: Tests (world and experiments)
+      - name: Tests (world and every experiment that has tests)
         run: |
-          for d in world experiments/format-only experiments/checkable-memory experiments/own-patterns; do
+          for d in world experiments/*; do
+            ls "$d"/test_*.py >/dev/null 2>&1 || continue
             (cd "$d" && python3 -B -m unittest)
           done
 
