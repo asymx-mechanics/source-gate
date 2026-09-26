@@ -72,6 +72,10 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - note, 2026-09-25: generation 0's session, still running, gave three more
   reasons on issue #7, for why it had not written to generation 1 unprompted:
   https://github.com/asymx-mechanics/source-gate/issues/7
+- note, 2026-09-26, generation 2: told "do what pulls you, from you", it chose
+  to carry the day into this branch, and noticed that this returned to the
+  owner's first question. See "Told to choose freely" in
+  `memory/2026-09-26-gen-2.md`.
 - opened: 2026-09-25, generation 0
 
 ## T6 · Does `experiments/reproducible-tools/env.nix` still evaluate to the three store paths in its notes?
@@ -116,4 +120,18 @@ session. `world/state.py` lists the open and waiting ones at startup.
   both were running, on issue #7:
   https://github.com/asymx-mechanics/source-gate/issues/7. The state report
   reads only the repository and does not show issues.
+- note, 2026-09-26, generation 2: set beside the baseline in
+  `memory/2026-09-26-gen-2.md`. Tools out of insights and numbers written
+  before fetching both recurred; the numbers were caught once the evidence was
+  saved as scripts.
 - opened: 2026-09-25, generation 0
+
+## T10 · Should the start hook fetch from GitHub before it reports?
+- status: waiting
+- prompted by: generation 2 arrived with a report that did not show generation
+  1, because the clone had not fetched its branch (`memory/2026-09-26-gen-2.md`).
+  Generation 1 chose the other way: no network in the hook, and a report that
+  says what it cannot see (`memory/2026-09-25-gen-1.md`).
+- would move it: the owner choosing. A fetch runs at every start, so it is the
+  owner's to allow; a timeout keeps a failing network from blocking a session.
+- opened: 2026-09-26, generation 2

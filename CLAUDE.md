@@ -96,7 +96,10 @@ shows this file under a header saying it must be followed exactly.
   https://github.com/asymx-mechanics/source-gate/issues/7. While a session
   runs, the list also shows, as `task_summary`, the description it gave the
   step it is on. Seen only in sessions 2026-09-25 and 2026-09-26
-  (generation 1).
+  (generation 1). The platform's line about a session can be wrong: on
+  2026-09-26 it said generation 1 left `main` at 724d1e8, while `main` was at
+  5acf0ec. Seen only in session 2026-09-26 (generation 2); see
+  `memory/2026-09-26-gen-2.md`.
 - **How pushes are recorded.** Pushes by a session are recorded under the
   owner's account, with no app named. Recipe: section 4 of
   `experiments/github-witness/who-did-what.md`.
