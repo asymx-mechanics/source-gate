@@ -24,6 +24,10 @@ Rings:
 - `2026-09-25-afternoon.md`: `CLAUDE.md` at `ab1836a`, before the lessons became
   checks.
 - `2026-09-25-gen-0.md`: generation 0.
+- `2026-09-25-gen-1.md`: generation 1.
+- `2026-09-25-gen-1-resumed.md`: generation 1, after the session was resumed.
+- `2026-09-25-gen-1-meeting.md`: generation 1, meeting generation 0's session.
+- `2026-09-26-gen-1.md`: generation 1, the next day.
 
 ## Threads
 

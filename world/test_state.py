@@ -110,6 +110,17 @@ class Unsettled(unittest.TestCase):
         self.assertIn("generation 1, its ring is not committed yet", text)
         self.assertIn("World: unsettled", text)
 
+    def test_a_second_ring_of_the_same_generation_not_yet_committed_keeps_it_open(self):
+        world = World()
+        world.ring("2026-09-25-gen-0-later.md", "generation 0, later\n")
+        text, _ = world.run()
+        self.assertIn("generation 0, its ring is not committed yet", text)
+        self.assertIn("generation 0's ring is not committed", text)
+        world.commit("Claude", "Generation 0 ends again")
+        text, _ = world.run()
+        self.assertIn("generation 0, ended in", text)
+        self.assertIn("World: settled", text)
+
     def test_no_generation_ring_means_unsettled(self):
         world = World()
         world.git("rm", "-q", "memory/2026-09-25-gen-0.md")
@@ -130,6 +141,14 @@ class Discovery(unittest.TestCase):
         text, _ = world.run()
         self.assertIn("memory/2026-09-26-gen-1.md on later", text)
         self.assertIn("last recorded: generation 0", text)
+
+    def test_finding_nothing_names_the_refs_it_looked_at(self):
+        world = World()
+        text, _ = world.run()
+        self.assertIn("none on the 0 other ref(s) this clone has. To see GitHub's: git fetch origin", text)
+        world.git("branch", "plain")
+        text, _ = world.run()
+        self.assertIn("none on the 1 other ref(s) this clone has (plain)", text)
 
 
 class Hook(unittest.TestCase):

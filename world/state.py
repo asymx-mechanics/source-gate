@@ -73,21 +73,27 @@ def generations(root):
     end = git(root, "log", "-1", "--diff-filter=A", "--format=%H", "--", *own)
     since = git(root, "log", "--format=%h\t%an\t%s", f"{end}..HEAD").splitlines() if end else []
     by_claude = [c for c in since if c.split("\t")[1] == "Claude"]
-    return {"number": number, "rings": sorted(own), "end": end[:7], "since": since, "unrecorded": by_claude}
+    committed = set(git(root, "ls-tree", "-r", "--name-only", "HEAD", "--", "memory").splitlines())
+    pending = [r for r in own if r not in committed]  # a generation can have several rings; any uncommitted one keeps it open
+    return {"number": number, "rings": sorted(own), "end": end[:7], "since": since, "unrecorded": by_claude, "pending": pending}
 
 
 def rings_elsewhere(root):
-    """Generation rings on other branches that this checkout does not have."""
+    """Generation rings on other branches that this checkout does not have, and the refs looked at.
+
+    Only refs this clone has are seen. Generation 1's clone had fetched nothing but `main` at start.
+    """
     here = set(git(root, "ls-tree", "-r", "--name-only", "HEAD", "--", "memory").splitlines())
     current = git(root, "rev-parse", "--abbrev-ref", "HEAD")
-    found = []
+    found, looked = [], []
     for ref in git(root, "for-each-ref", "--format=%(refname:short)", "refs/heads", "refs/remotes").splitlines():
         if ref in (current, f"origin/{current}") or ref.endswith("/HEAD") or ref == "origin":
             continue
+        looked.append(ref)
         for path in git(root, "ls-tree", "-r", "--name-only", ref, "--", "memory").splitlines():
             if GEN_RING.match(pathlib.PurePosixPath(path).name) and path not in here:
                 found.append(f"{path} on {ref}")
-    return sorted(set(found))
+    return sorted(set(found)), looked
 
 
 def report(root, source=None):
@@ -106,15 +112,19 @@ def report(root, source=None):
     if gen is None:
         out.append("- no generation has recorded itself yet (a generation ring is memory/<date>-gen-<N>.md)")
     else:
-        ended = f"ended in {gen['end']}" if gen["end"] else "its ring is not committed yet, so it has not ended"
+        ended = f"ended in {gen['end']}" if gen["end"] and not gen["pending"] else "its ring is not committed yet, so it has not ended"
         out.append(f"- last recorded: generation {gen['number']}, {ended} ({', '.join(gen['rings'])})")
         out.append(f"- commits here since then: {len(gen['since'])}, of which {len(gen['unrecorded'])} by Claude")
         for line in gen["since"][:5]:
             short, author, subject = line.split("\t", 2)
             out.append(f"  {short} {author}: {subject[:70]}")
-    elsewhere = rings_elsewhere(root)
+    elsewhere, looked = rings_elsewhere(root)
     if elsewhere:
         out.append("- generation rings on other branches, not in this checkout: " + "; ".join(elsewhere[:5]))
+    else:
+        shown = ", ".join(looked[:4]) + (", ..." if len(looked) > 4 else "")
+        out.append(f"- generation rings on other branches: none on the {len(looked)} other ref(s) this clone has"
+                   + (f" ({shown})" if looked else "") + ". To see GitHub's: git fetch origin, then rerun.")
 
     out += ["", "Guards"]
     out += [f"- {p}" for p in problems] or ["- clean: rings unchanged, pointers resolve, facts point, CLAUDE.md within limit, threads have a status"]
@@ -127,7 +137,7 @@ def report(root, source=None):
     unsettled = problems + ([f"{len(gen['unrecorded'])} commit(s) by Claude after the last generation ring"] if gen and gen["unrecorded"] else [])
     if gen is None:
         unsettled.append("no generation ring")
-    elif not gen["end"]:
+    elif not gen["end"] or gen["pending"]:
         unsettled.append(f"generation {gen['number']}'s ring is not committed")
     dirty = git(root, "status", "--porcelain").splitlines()
     out += ["", "World: " + ("settled" if not unsettled else "unsettled: " + "; ".join(unsettled))]

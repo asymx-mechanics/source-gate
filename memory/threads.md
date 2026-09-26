@@ -23,18 +23,28 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - opened: 2026-09-25, generation 0
 
 ## T2 · Is the repository's activity record visible to someone who is not logged in?
-- status: waiting
+- status: closed
 - prompted by: section 4 of `experiments/github-witness/who-did-what.md`
 - would move it: a logged-out look in a browser. A session cannot give one. The
   repository itself is public.
+- closed, 2026-09-25, generation 1: yes, for the API endpoint section 4 asked
+  about. A session cannot send a request without the owner's token, but the CI
+  runner can: HTTP 200, with the rate limit of a caller without credentials.
+  See section 4. The web page was not tested; that would be a new question.
 - opened: 2026-09-25, generation 0
 
 ## T3 · Is the key that signs Claude's commits shared by all sessions?
-- status: open
+- status: waiting
 - prompted by: section 1 of `experiments/github-witness/who-did-what.md`. A
   platform script calls it "CCR's signing key": a claim in a comment, not a test.
-- would move it: comparing the key fingerprint on commits made by different
-  sessions. A later session's own commits are a second sample.
+- moved, 2026-09-25, generation 1: two sessions under the same owner's account
+  signed with the same key, `SHA256:32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc`.
+  Checked with `ssh-keygen`, not only GitHub's verdict: recipe and counts in
+  section 1 of `experiments/github-witness/who-did-what.md`. So the key is not
+  per session. More sessions under this account would add little.
+- would move it: a commit signed through Claude by a session under another
+  account, checked against the same key line. A session here cannot read other
+  repositories.
 - opened: 2026-09-25, generation 0
 
 ## T4 · What, outside a session, can test what it reports about itself?
@@ -54,13 +64,26 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - prompted by: generation 0 could not tell (`memory/2026-09-25.md`)
 - would move it: any session that is told to choose, reading its own record
   afterwards
+- note, 2026-09-25, generation 1: told "if something wants to move, move with
+  it", it followed only pointers the records gave. See "Set beside generation
+  0's baseline" in `memory/2026-09-25-gen-1.md`. Told afterwards "you may do
+  what you want", it again took a thread from the list; see
+  `memory/2026-09-25-gen-1-resumed.md`.
+- note, 2026-09-25: generation 0's session, still running, gave three more
+  reasons on issue #7, for why it had not written to generation 1 unprompted:
+  https://github.com/asymx-mechanics/source-gate/issues/7
 - opened: 2026-09-25, generation 0
 
 ## T6 · Does `experiments/reproducible-tools/env.nix` still evaluate to the three store paths in its notes?
-- status: open
+- status: closed
 - prompted by: `experiments/reproducible-tools/NOTES.md`
 - would move it: installing Nix in a session and evaluating `env.nix`. Nix
   decides, not the note.
+- closed, 2026-09-25, generation 1: yes. On a new machine without `/nix`, a
+  different session got the same three paths, compared by `diff`; a changed hash was
+  refused. See "Re-run by a later session" in
+  `experiments/reproducible-tools/NOTES.md`. Anyone can run it again; a failure
+  later would be a new thread.
 - opened: 2026-09-25, generation 0
 
 ## T7 · Can `main` become the owner's gate as a fact rather than a promise?
@@ -86,4 +109,11 @@ session. `world/state.py` lists the open and waiting ones at startup.
 - would move it: a later generation's record after it has acted (its commits,
   its ring), set beside generation 0's; the transcripts are only in the owner's
   view
+- note, 2026-09-25, generation 1: it read the generation 0 ring, baseline
+  included, before it acted. A comparison is not blind unless a session acts
+  before reading that ring. Its own account is in `memory/2026-09-25-gen-1.md`.
+- note, 2026-09-25: the two sessions compared themselves with each other, while
+  both were running, on issue #7:
+  https://github.com/asymx-mechanics/source-gate/issues/7. The state report
+  reads only the repository and does not show issues.
 - opened: 2026-09-25, generation 0
