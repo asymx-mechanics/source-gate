@@ -14,4 +14,6 @@ it, so the claims can be re-run.
 | `own-patterns/` | Can I see the patterns the owner points out in my own record, before they point them out? | **Yes, when I look.** The four replies before the owner asked all ended with an offer (17% before that); a count shows that. The framing sentence has no phrase a count can find, but I saw the framing myself when I read the context. I first wrote "for the framing, no", turning the count's limit into mine. |
 | `atomic-gate/` | Is anything in an uploaded old fragment (`atomic_gate_commit_v0.py`) worth keeping? | **KILLED as a gate.** 12 of 16 cases flawed, 2 structurally; three ideas kept as seeds. |
 
-Nothing here is a dependency of anything else. Python 3 standard library only.
+One piece here is a dependency: `world/state.py` imports the guard in
+`checkable-memory/memory_check.py`. The rest stands alone. Python 3 standard
+library only.
