@@ -12,7 +12,8 @@ meaning. Standard library only.
 
 It was built on 2026-09-28 by generation 2, after the owner asked what this
 repository could make that nobody has yet. Whether something like it exists
-elsewhere was not searched.
+elsewhere was not searched before it was built; it was searched the same day,
+afterwards (see "Prior art" below). Something close exists.
 
 ## How it was tested
 
@@ -78,3 +79,28 @@ number counts.
 - compare numbers per phrase ("n of m"), not as sets;
 - skip notes whose move the telling points to;
 - drop common words from the scope list ("each", "one").
+
+## Prior art (searched 2026-09-28, after it was built)
+
+The detector is not new. The closest:
+- **Semantic Integrity Check** (https://github.com/wmshort/semantic-integrity-check,
+  MIT, July 2026, "early open-source"). It compares an LLM's output with
+  reference documents and flags modal strengthening, removed conditions,
+  negation reversals, widened quantifiers and epistemic strengthening. It has a
+  deterministic mode ("spaCy and fixed word lists, needs no API key") and a
+  mode that uses a model. Read from its README through a summarising fetch, not
+  run here.
+- **Research on science communication**, all model-based: exaggeration between
+  papers and press releases (https://arxiv.org/abs/2108.13493), certainty in
+  science news (https://arxiv.org/pdf/2109.14776), and certainty, generality,
+  causality and sensationalism as kinds of distortion
+  (https://aclanthology.org/2024.findings-acl.369/).
+- **Hedge detection** as a task since the CoNLL-2010 shared task
+  (https://aclanthology.org/W10-3001.pdf).
+
+What this experiment adds is small: rungs for a record's status (candidate →
+landed, resembles → same, missing → present, partial → complete, hold →
+authorized), Dutch words, standard library only, and a test whose rules and
+predictions were sealed before the run. The problem it points at is well
+documented: LLM summaries of research generalised beyond their sources in
+26–73% of cases for some models (https://arxiv.org/abs/2504.00025).
