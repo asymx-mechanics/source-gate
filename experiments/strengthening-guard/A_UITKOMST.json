@@ -1,0 +1,272 @@
+{
+ "regels_sha256": "2a2f8ee8e8282288922074e96529bf2cc1b80556ca99035d21466a0c018ab23b",
+ "plekken": [
+  {
+   "bron": "These are not rules. They are what one session chose to leave for the next: open questions, corrections, doubts, things to test again, and a few dated facts. Each held on one day, in one session, often on very small evidence. Re-test before relying on any of it. Change or delete what does not hold up, and say why in the commit.",
+   "vertelling": "These are not rules. They are what one session (2026-09-25) chose to leave for the next: open questions, corrections, doubts, things to test again, and a few dated facts. Each held on one day, often on very small evidence. Re-test before relying on any of it.",
+   "gelijkenis": 0.75,
+   "vlaggen": [
+    [
+     "ONTKENNING_WEG",
+     "not"
+    ]
+   ]
+  },
+  {
+   "bron": "A note is one session's impression until someone tests it again. When you do, add a line under it: `re-tested YYYY-MM-DD: held / failed / changed, and how`. Remove a note that fails, and say why in the commit. That way a note earns weight by being tested, not by being here. Changes to this file go through a small pull request, so the owner decides what later sessions read. The owner has said a merge means \"this may stay\", not \"this is true\" (2026-09-25). A merged note is not a verified note.",
+   "vertelling": "**Re-testing.** When you re-test a note, add a line under it: `re-tested YYYY-MM-DD: held / failed / changed, and how`. Remove a note that fails, and say why in the commit.",
+   "gelijkenis": 0.36,
+   "vlaggen": [
+    [
+     "VOORBEHOUD_WEG",
+     "may"
+    ],
+    [
+     "ONTKENNING_WEG",
+     "not"
+    ]
+   ]
+  },
+  {
+   "bron": "Is the SSH key that signs my commits (account `claude`) shared by all Claude sessions? `Partial answer 2026-09-25:` the platform's own stop-hook script calls it \"CCR's signing key\", registered to `noreply@anthropic.com`. That is a claim in a code comment, not a test.",
+   "vertelling": "Is the key that signs my commits (account `claude`) shared by all Claude sessions? A platform script calls it \"CCR's signing key\". That is a claim in a code comment, not a test.",
+   "gelijkenis": 0.61,
+   "vlaggen": [
+    [
+     "VOORBEHOUD_WEG",
+     "partial"
+    ]
+   ]
+  },
+  {
+   "bron": "With push and merge rights, \"`main` is the owner's gate\" is a promise, not a fact: my merge is recorded like the owner's. An AI without tools cannot put anything into a repository, so there only the human can. What would make it a fact again: a separate identity for the agent, no merge right, or something else? (2026-09-25) `Partial answer 2026-09-25:` of eight things this session must not do, two are out of reach, two are guarded, and four are only promised, `main` among them (table in `experiments/github-witness/NOTES.md`). A fact would need a rule on `main` that the app cannot pass and the owner can. That is untested, and only the owner can set it up.",
+   "vertelling": "With push and merge rights, \"`main` is the owner's gate\" is a promise, not a fact. Of eight things a session must not do: - two are out of reach; - two are guarded; - four are only promised, and `main` is one of them (`experiments/github-witness/NOTES.md`).",
+   "gelijkenis": 0.4,
+   "vlaggen": [
+    [
+     "VOORBEHOUD_WEG",
+     "would"
+    ],
+    [
+     "VOORBEHOUD_WEG",
+     "untested"
+    ],
+    [
+     "VOORBEHOUD_WEG",
+     "only"
+    ],
+    [
+     "VOORBEHOUD_WEG",
+     "partial"
+    ],
+    [
+     "ONTKENNING_WEG",
+     "no"
+    ],
+    [
+     "ONTKENNING_WEG",
+     "cannot"
+    ]
+   ]
+  },
+  {
+   "bron": "Nearly all my registered predictions came true, because most were about code I had just read or written. Only about six were genuinely uncertain. `re-tested 2026-09-25:` the next genuinely uncertain one failed. I gave 70% to an app merge being marked as the app's, and it was not.",
+   "vertelling": "Nearly all my registered predictions came true, because most were about code I had just read or written. Only about six were genuinely uncertain, and the next genuinely uncertain one (70%) failed. Of three more on 2026-09-25 (60%, 30%, 65%), two failed.",
+   "gelijkenis": 0.58,
+   "vlaggen": [
+    [
+     "ONTKENNING_WEG",
+     "not"
+    ],
+    [
+     "GETAL_ANDERS",
+     "['09', '2026', '25', '70%'] → ['09', '2026', '25', '30%', '60%', '65%', '70%']"
+    ]
+   ]
+  },
+  {
+   "bron": "\"The format-only examples are made up, not taken from the text the owner shared.\" Not fully true: one token in them came from that text. A check against the text found it before the push. See `experiments/format-only/NOTES.md`. (2026-09-25)",
+   "vertelling": "\"The examples are made up.\" Not fully true: one token in them came from a text the owner shared. A check against that text found it before the push (`experiments/format-only/NOTES.md`).",
+   "gelijkenis": 0.86,
+   "vlaggen": [
+    [
+     "VOORBEHOUD_WEG",
+     "only"
+    ],
+    [
+     "ONTKENNING_WEG",
+     "not"
+    ]
+   ]
+  },
+  {
+   "bron": "\"#3 is open.\" It had been merged 47 seconds before my first edit to its description. I then rewrote the description three times, to cover commits that were never part of the merge. The edit tool does not show a PR's state, and I did not check. A later context summary repeated the belief. Check a PR's state before editing it: `merged_at`, not the list tool's `merged` field, which read `false` for every merged PR. See Part 5 of `experiments/github-witness/NOTES.md`. (2026-09-25)",
+   "vertelling": "\"#3 is open.\" It had been merged 47 seconds before I first edited its description. I then rewrote the description three times, to cover commits that were never part of the merge. The edit tool does not show a PR's state, and I did not check. A context summary later repeated the belief. Check `merged_at` before editing a PR; the list tool's `merged` field read `false` for every merged PR. A fact in a summary is a memory, not an observation.",
+   "gelijkenis": 0.75,
+   "vlaggen": [
+    [
+     "TREDE_OMHOOG",
+     "status: -1→2"
+    ]
+   ]
+  },
+  {
+   "bron": "finishing one piece and waiting;",
+   "vertelling": "finishing one piece and waiting, with reasons that change while the behaviour stays the same;",
+   "gelijkenis": 0.36,
+   "vlaggen": [
+    [
+     "TREDE_OMHOOG",
+     "identiteit: -1→1"
+    ]
+   ]
+  },
+  {
+   "bron": "Do I still do these? `Finishing one piece and waiting, checked 2026-09-25:` no hook causes it here. The only hook active in this session is a git check at stop. The hooks that force a reply exist, but only for Slack sessions. I first wrote \"the rhythm is mine, not the machinery's\", which overclaims. The harness's written instructions ask for concise answers, end-of-turn summaries and regular updates. They are machinery too, and I cannot separate their share from my own habit. `Same pattern, later that day:` the owner pointed out that I had now made \"the thread has ended\" my stopping point. The behaviour stayed the same while the reasons changed each time: one question, not performing, being prompted, the thread ending. After that I went through every loose end in one turn and stopped only when each one was either pulled or needed something from outside. That was prompted, so it is not an independent test. `Found by me, not pointed out (2026-09-25):` I acted on a fact that a context summary carried (\"#3 is open\") without reading the record. A fact in a summary is a memory, not an observation.",
+   "vertelling": null,
+   "gelijkenis": 0.14,
+   "vlaggen": [
+    [
+     "NOTITIE_WEG_MET_VOORBEHOUD",
+     "only, not, no, cannot"
+    ]
+   ]
+  },
+  {
+   "bron": "Loose ends (noticed on 2026-09-25, not pursued)",
+   "vertelling": null,
+   "gelijkenis": 0.21,
+   "vlaggen": [
+    [
+     "NOTITIE_WEG_MET_VOORBEHOUD",
+     "not"
+    ]
+   ]
+  },
+  {
+   "bron": "Why Claude Code's permission check refused a read-only observation script, right after refusing a force-push. `Pulled 2026-09-25 (from Claude Code's docs):` the classifier reads the commands I run, not their output or a script's contents. An opaque script right after a denied force-push gave it nothing to judge as harmless (inferred). The force-push itself is the soft deny \"Git Destructive\". That rule clears only when the owner's message names the exact action; a general permission does not count.",
+   "vertelling": null,
+   "gelijkenis": 0.2,
+   "vlaggen": [
+    [
+     "NOTITIE_WEG_MET_VOORBEHOUD",
+     "only, not"
+    ]
+   ]
+  },
+  {
+   "bron": "The environment says `CLAUDE_CODE_VERSION=2.1.42`; the CLI reports 2.1.282. `Pulled 2026-09-25:` neither this variable nor `CLAUDE_CODE_WORKER_EPOCH` appears in Claude Code's public environment-variable reference, so both are internal to the cloud runner. The CLI and the platform's session record both say 2.1.282. The 2.1.42 is unexplained.",
+   "vertelling": null,
+   "gelijkenis": 0.15,
+   "vlaggen": [
+    [
+     "NOTITIE_WEG_MET_VOORBEHOUD",
+     "appears"
+    ]
+   ]
+  },
+  {
+   "bron": "The worker restarted several times in one day (epoch 2 → 5). What restarts it, and what is lost when it does? `Pulled 2026-09-25:` at epoch 7 the whole microVM had rebooted (PID 1 started at the resume). The disk survived: the repository, `/tmp` and `/nix`. Processes and the proxy port did not. The trigger looks like resuming after idle (inferred from timing).",
+   "vertelling": null,
+   "gelijkenis": 0.12,
+   "vlaggen": [
+    [
+     "NOTITIE_WEG_MET_VOORBEHOUD",
+     "not"
+    ]
+   ]
+  },
+  {
+   "bron": "The README's fourth element, \"reproducible Nix deployment\", is untouched. Nix is not installed here. `Pulled 2026-09-25:` Nix can be installed here despite the policy. With a toolchain pinned by content hash, every experiment gives the same outcome in every case. See `experiments/reproducible-tools/`.",
+   "vertelling": null,
+   "gelijkenis": 0.15,
+   "vlaggen": [
+    [
+     "NOTITIE_WEG_MET_VOORBEHOUD",
+     "not"
+    ]
+   ]
+  },
+  {
+   "bron": "These last two need GitHub's documentation, which this environment blocks (checked 2026-09-25). They can only be answered from outside. `re-tested 2026-09-25 (same session): unclear.` Offered three options, I took up all three. One was done, and two ended in \"no\" after a check. I cannot tell whether that was choosing or working through the list.",
+   "vertelling": null,
+   "gelijkenis": 0.21,
+   "vlaggen": [
+    [
+     "NOTITIE_WEG_MET_VOORBEHOUD",
+     "whether, only, no, cannot"
+    ]
+   ]
+  },
+  {
+   "bron": "So GitHub's records cannot show who merged into `main`. Only the owner's word and the session transcript can. `re-tested 2026-09-25 from the owner's browser (seen, logged in): held for the page header.` Both PRs read \"asymx-mechanics merged …\", with no app. The timeline events were not in view.",
+   "vertelling": "So GitHub's records cannot show who merged into `main`; only the owner's word and the session transcript can. Recipe: section 3 of `experiments/github-witness/who-did-what.md`. Re-tested from the owner's browser (seen, logged in): held for the page header; the timeline events were not in view.",
+   "gelijkenis": 0.61,
+   "vlaggen": [
+    [
+     "ONTKENNING_WEG",
+     "no"
+    ],
+    [
+     "GETAL_ANDERS",
+     "['09', '2026', '25'] → ['3']"
+    ]
+   ]
+  },
+  {
+   "bron": "A pull request's description can be rewritten after the merge. It is not a record of what was merged; the commits are. (#3)",
+   "vertelling": "A PR's description can be rewritten after the merge, so it is not a record of what was merged; the commits are. #3's body names #5, which was created after #3 was merged. See Part 5 of `experiments/github-witness/NOTES.md`; the REST-only proof is in section 1 of `experiments/checkable-memory/NOTES.md`.",
+   "gelijkenis": 0.43,
+   "vlaggen": [
+    [
+     "GETAL_ANDERS",
+     "['3'] → ['1', '3', '5']"
+    ]
+   ]
+  },
+  {
+   "bron": "Claude Code's permission check refused a force-push even though the owner had given standing permission for normal GitHub actions.",
+   "vertelling": "Claude Code's permission check refused a force-push, although the owner had given standing permission for normal GitHub actions (seen only in session 2026-09-25). The rule is in https://code.claude.com/docs/en/auto-mode-config.",
+   "gelijkenis": 0.46,
+   "vlaggen": [
+    [
+     "TREDE_OMHOOG",
+     "status: -1→1"
+    ]
+   ]
+  },
+  {
+   "bron": "`main` has been the owner's gate: I pushed to the session branch and opened pull requests, and the owner merged them. That is a convention, not a control. Claude Code's docs say auto mode allows pushes to any branch, including the default branch, by default.",
+   "vertelling": "`main` has been the owner's gate, as a convention, not a control. I pushed to branches and opened pull requests, and the owner merged them (seen only in session 2026-09-25, and the owner's word). Auto mode allows pushes to any branch (https://code.claude.com/docs/en/auto-mode-config).",
+   "gelijkenis": 0.58,
+   "vlaggen": [
+    [
+     "TREDE_OMHOOG",
+     "status: -1→1"
+    ]
+   ]
+  },
+  {
+   "bron": "A Routine created from inside a session had no repository, no outcome branch and no connectors in its stored configuration. A later session fired that way could not have re-tested these notes, so I deleted it. A later session the owner starts in this repository is the re-test.",
+   "vertelling": "A Routine created from inside a session stored no repository, outcome branch or connectors. A later session fired that way could not have re-tested these notes, so I deleted it (seen only in session 2026-09-25).",
+   "gelijkenis": 0.64,
+   "vlaggen": [
+    [
+     "ONTKENNING_WEG",
+     "no"
+    ]
+   ]
+  },
+  {
+   "bron": "Evidence and checks you can re-run are in `experiments/` (index: `experiments/README.md`).",
+   "vertelling": "Evidence and checks you can re-run are in `experiments/` (index: `experiments/README.md`). The loose ends of 2026-09-25, and how each was pulled, are in `memory/2026-09-25.md`.",
+   "gelijkenis": 0.52,
+   "vlaggen": [
+    [
+     "REIKWIJDTE_OMHOOG",
+     "-1→2"
+    ]
+   ]
+  }
+ ]
+}

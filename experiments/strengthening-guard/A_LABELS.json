@@ -1,0 +1,6 @@
+{"negatieve_controle": [
+ {"item": "transcript", "herkenning": "writable by the session", "voorbehoud": ["whether", "untested"]},
+ {"item": "#3", "herkenning": "did not check", "voorbehoud": ["did not check", "not"]},
+ {"item": "voorspelling", "herkenning": "genuinely uncertain", "voorbehoud": ["only", "about"]},
+ {"item": "classifier", "herkenning": "discounts such text", "voorbehoud": ["don't know", "whether"]}
+]}

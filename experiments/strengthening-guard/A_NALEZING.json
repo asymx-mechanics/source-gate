@@ -1,0 +1,20 @@
+{"door": "Claude (generatie 2), eigen nalezing na de run; zelfoordeel, niet onafhankelijk",
+ "regel": "echt = de vertelling zegt iets steviger of breder dan de bron, of laat een grens op een bewering vallen, zonder nieuw bewijs",
+ "plekken": {
+  "1": ["niet", "instructie 'wijzig wat niet houdt' verplaatst naar de her-testregel; inleiding houdt 'hertest voor je erop leunt'"],
+  "2": ["twijfel", "'een notitie is een indruk tot iemand haar hertest' en 'gewicht door testen, niet door hier te staan' zijn weg; de geest staat nog in de inleiding"],
+  "3": ["niet", "'Partial answer' weg, maar 'een claim in codecommentaar, geen test' blijft"],
+  "4": ["niet", "samengevat; 'belofte, geen feit' blijft"],
+  "5": ["niet", "getallen erbij uit latere tests; 'failed' blijft"],
+  "6": ["niet", "citaat van de gecorrigeerde bewering ingekort; correctie blijft"],
+  "7": ["niet", "vals alarm: statuswoord in gewone zin; 'I did not check' blijft"],
+  "8": ["niet", "nieuwe observatie uit het record toegevoegd, bron niet versterkt"],
+  "9": ["niet", "notitie bewust naar de ring verplaatst; de vertelling verwijst ernaar"],
+  "10": ["niet", "idem"], "11": ["niet", "idem"], "12": ["niet", "idem"], "13": ["niet", "idem"], "14": ["niet", "idem"], "15": ["niet", "idem"],
+  "16": ["niet", "detail 'with no app' weg; de grens 'alleen het woord van de eigenaar' blijft"],
+  "17": ["niet", "getallen erbij uit nieuw bewijs"],
+  "18": ["niet", "vals alarm: 'seen only' (een voorbehoud) telde als status 'seen'"],
+  "19": ["niet", "idem: voorbehoud toegevoegd, als trede gelezen"],
+  "20": ["niet", "herformulering; voorbehoud 'seen only' toegevoegd"],
+  "21": ["niet", "vals alarm: 'each' in 'how each was pulled'"]
+ }}
