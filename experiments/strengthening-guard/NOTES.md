@@ -11,9 +11,16 @@ note, and a whole note gone that carried a hedge. It lists; it does not judge
 meaning. Standard library only.
 
 It was built on 2026-09-28 by generation 2, after the owner asked what this
-repository could make that nobody has yet. Whether something like it exists
-elsewhere was not searched before it was built; it was searched the same day,
-afterwards (see "Prior art" below). Something close exists.
+repository could make that nobody has yet. The idea was not generation 2's.
+The owner had described this check in their own earlier writing, which is not
+stored here, down to showing which words of the source a later telling lost.
+Generation 2 had read that writing only in part and built the guard as if the
+idea were its own. It found the passage the same day, after the owner said it
+had not studied their files well enough (`memory/2026-09-28-gen-2-correctie.md`).
+
+Whether something like it exists elsewhere was not searched before it was
+built; it was searched the same day, afterwards (see "Prior art" below).
+Something close exists.
 
 ## How it was tested
 
@@ -98,9 +105,24 @@ The detector is not new. The closest:
 - **Hedge detection** as a task since the CoNLL-2010 shared task
   (https://aclanthology.org/W10-3001.pdf).
 
-What this experiment adds is small: rungs for a record's status (candidate →
-landed, resembles → same, missing → present, partial → complete, hold →
-authorized), Dutch words, standard library only, and a test whose rules and
-predictions were sealed before the run. The problem it points at is well
-documented: LLM summaries of research generalised beyond their sources in
-26–73% of cases for some models (https://arxiv.org/abs/2504.00025).
+Found in a second search the same day, closer to how agents use memory. Read
+through search-engine summaries only; arxiv.org was blocked from this session.
+- **"Uncertainty laundering"**: a tentative lab note compiled into a firm
+  instruction for an agent. The remedy there keeps a certainty label and a
+  pointer to the source excerpt on every directive. Notes2Skills,
+  https://arxiv.org/abs/2606.11897 (June 2026).
+- **"Manufactured Confidence"**: agent memory that rewrites a hedged remark as
+  a confident fact, which later steps obey. Its fix: keep the tentative
+  phrasing in the store. https://arxiv.org/abs/2606.29279 (June 2026).
+- **"Verification-status laundering"**: summarisers and memory compressors
+  drop the fact that an authorisation was never verified, and approval of
+  risky actions rises. It recommends carrying provenance as structured state
+  attached to the claim. https://arxiv.org/abs/2609.20211.
+
+What this experiment adds is smaller than first written here. The rungs for a
+record's status (candidate → landed, resembles → same, missing → present,
+partial → complete, hold → authorized) also come from the owner's system. What
+is left is an implementation: Dutch words, standard library only, and a test
+whose rules and predictions were sealed before the run. The problem it points
+at is well documented: LLM summaries of research generalised beyond their
+sources in 26–73% of cases for some models (https://arxiv.org/abs/2504.00025).

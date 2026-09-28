@@ -31,6 +31,7 @@ Rings:
 - `2026-09-26-gen-2.md`: generation 2.
 - `2026-09-26-gen-2-na-merge.md`: generation 2, after the merge of #8.
 - `2026-09-28-gen-2-wachter.md`: generation 2, the strengthening guard.
+- `2026-09-28-gen-2-correctie.md`: generation 2, correcting whose idea the guard was.
 
 ## Threads
 
